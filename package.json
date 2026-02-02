@@ -33,15 +33,13 @@
     "session-file-store": "^1.5.0",
     "xss-clean": "^0.1.4"
   },
-<<<<<<< HEAD
   "directories": {
     "lib": "lib"
   },
   "keywords": [],
   "description": "",
-=======
->>>>>>> 4a66e791da2eb8c7e36e575ff383402b174e856b
   "devDependencies": {
+    "browser-sync": "^3.0.4",
     "nodemon": "^3.1.11"
   }
 }
