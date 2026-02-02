@@ -16,12 +16,14 @@
    --bg: #000000;
    --text: #ffffff;
    --fill: #ffffff;
+   --profilebg: #141414;
  }
  
- [data-theme="white"] {
+ [data-theme="lightmode"] {
    --bg: #ffffff;
    --text: #000000;
    --fill: #000000;
+   --profilebg: #ffff;
  }
 
 .opacityLow {
