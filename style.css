@@ -1,5 +1,5 @@
-/* vi använder tailwind för enekl design  */
-@import "tailwindcss";
+/* vi använder tailwind för enekl design 
+@import "tailwindcss"; */
 
 * {
    margin: 0;
@@ -9,23 +9,118 @@
    user-select: none !important;
    box-sizing: border-box;
    font-family: "Exo 2";
+   color: white;
 }
+
 
 body {
    background-color: #141414;
 }
 
 header {
-   position: relative;
-   height: 10vh;
+   position: fixed;
+   top: 0;
+   height: 10%;
    backdrop-filter: blur(20px);
    width: 100%;
+   background-color: #1a1919;
+   z-index: 10;
    border-bottom: 1px solid #303030;
 }
 
 header>img {
    position: absolute;
    top: 55%;
+   width: 90px;
    transform: translate(0, -50%);
-   width: 100px;
+   padding-left: 16.5px;
+   filter: drop-shadow(0px 0px 10px #006aff);
+}
+
+.profile-exist {
+   position: absolute;
+   top: 50%;
+   right: 4vw;
+   transform: translate(0, -50%);
+   width: 2.8vw;
+   height: 2.8vw;
+   border-radius: 50%;
+   border: 1px solid #303030;
+   box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px;
+}
+
+.profile-exist-letter {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: #fff;
+   font-size: 16px;
+   font-weight: 600;
+}
+
+nav {
+   position: fixed;
+   top: 10%;
+   left: 0;
+   width: 16%;
+   height: 100%;
+   background-color: #1a1919;
+   border-right: 1px solid #303030;
+   display: flex;
+   flex-direction: column ;
+   align-items: center;
+   overflow-y: auto;
+   padding-bottom: 2vh;
+   
+}
+
+h1 {
+   font-weight: 400;
+}
+
+.lektioner {
+   height: 40px;
+   flex-shrink: 0;
+   border-radius: 100px ;
+   margin-top: 5px;
+   transition: 200ms;
+   position: relative;
+   display: flex;
+   gap: 6px;
+   width: 94%;
+   align-items: center;
+   padding-left: 20px;
+   cursor: pointer;
+}
+
+.lektioner svg {
+   fill: #dededeaf !important;
+}
+
+.lektioner h1 {
+   font-size: 14.5px;
+   font-weight: 400;
+   fill: #dededeaf !important;
+}
+
+.lektioner:hover {
+   background-color: #252424;
+   opacity: 80%;
+}
+
+.logo-letkioner {
+   width: 2vw;
+   height: 2vw;
+   font-size: 13px;
+   padding: 9px;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+   font-size: 15px;
+   font-family: 700;
+   background-color: #752e9b8e;
+   border: 1px solid #752E9B;
 }
