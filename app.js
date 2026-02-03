@@ -38,19 +38,45 @@ $(document).on("click", ".add-lektion", async function () {
 // $(document).on("click", ".klasser-wrapper", function () {
 //   const clicked = $(this);
 // })
+$(document).on("click", ".klasser-remove", function (event) {
+  event.stopPropagation(); 
+  let id = $(this).parent().attr("data-id");
+  Swal.fire({
+    title: "Är du säker?",
+    text: "Detta går inte att ångra!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ja, ta bort det!",
+    theme: "dark",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Borttagen!",
+        text: "Din fil har tagits bort.",
+        icon: "success"
+      });
+      console.log(id)
+      $(`.klasser-wrapper[data-id="${id}"]`).remove();
+      $(`.lektioner[data-id="${id}"]`).remove();
+    }
+  });
+});
+
 $(document).on("click", ".klasser-wrapper", function () {
   const clicked = $(this);
   const isActive = clicked.hasClass("active");
 
   $(".klasser-wrapper").find(".klasser-arrow").css("transform", "rotate(0deg)")
-  $(".klasser-wrapper>section>h1").css("color", "#ffffffc0")
 
   $(".klasser-wrapper-footerInfo").hide();
   $(".klasser-wrapper").removeClass("active");
+  $(".klasser-remove").hide()
 
   if (isActive) return;
+  clicked.find(".klasser-remove").show()
   clicked.find(".klasser-arrow").css("transform", "rotate(180deg)")
-  clicked.find("section").find("h1").css("color", "#fff")
   clicked.addClass("active");
   clicked.find(".klasser-wrapper-footerInfo").show();
 });
@@ -109,20 +135,27 @@ btn.addEventListener("click", () => {
    } else {
       if (localStorage.getItem("theme") == "darkmode") {
          localStorage.setItem("theme", "lightmode");
-         $("canvas").hide()
-        //  document.querySelector('canvas').style.opacity = "0"
       } else {
          localStorage.setItem("theme", "darkmode");
-         $("canvas").show()
-        //  document.querySelector('canvas').style.opacity = "1"
       }
    }
    setModeType(localStorage.getItem("theme"))
 });
 
+$(document).ready(function() {
+  if (localStorage.getItem("theme")) {
+    setModeType(localStorage.getItem("theme"))
+  }
+})
+
 function setModeType(type) {
    document.documentElement.setAttribute("data-theme", type);
    document.body.dataset.theme = type;
+   if (type == "darkmode") {
+    $("canvas").show()
+   } else {
+    $("canvas").hide()
+   }
 }
 
 let isNavbarActive = true;
@@ -211,7 +244,7 @@ function getGridSize() {
 }
 
 function drawGrid() {
-  ctx.strokeStyle = "#1f1f204f";
+  ctx.strokeStyle = "#cccccc26";
   ctx.lineWidth = 1.1;
 
   const gridSize = getGridSize();
@@ -321,3 +354,20 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
   });
 });
+
+
+const tooltipTexts = {
+  [".add-lektion"]: "Add lektion text",
+  [".klasser-remove"]: "Ta bort klassen",
+  [".tema"]: "Ändra färg teman",
+}
+
+$.each(tooltipTexts, function(k, v) {
+  console.log(k)
+  $(k).tooltipster({
+    content: v,
+    animation: 'fade',
+    delay: 0,
+    speed: 120,
+  });
+})

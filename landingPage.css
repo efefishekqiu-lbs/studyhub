@@ -14,6 +14,7 @@
   --fill: #ffffff;
   --profilebg: #141414;
   --headerbg: #1a1919;
+  --borderCard: rgba(255, 255, 255, 0.336);
   --borderBtm: #303030;
   --hoverBg: #252424;
   --shadows: rgba(0, 0, 0, 0.17)
@@ -24,17 +25,20 @@
   --text: #000000;
   --fill: #000000;
   --profilebg: #ffff;
+  --borderCard: rgba(0, 0, 0, 0.123);
   --headerbg: #ffff;
   --borderBtm: #303030;
   --hoverBg: #a3a3a3;
   --bgSection: rgb(255, 255, 255);
   --shadows: rgba(0, 0, 0, 0)
 }
-s
+
 
 body {
   background-color: var(--bg);
   color: #1f2937;
+  animation-name: fadeIn;
+  animation-duration: 300ms;
 }
 section a {
   color: white
@@ -47,6 +51,7 @@ section a {
   padding: 0px 2%;
   height: 9vh;
   z-index: 100000;
+  border-bottom: 1px solid #bebcbc56;
   background: var(--bg);
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   position: sticky;
@@ -169,7 +174,7 @@ footer img {
 .section {
   padding: 60px 8%;
   text-align: center;
-  background-color: var(--bgSection);
+  background-color: var(--bg);
 }
 
 .section h2 {
@@ -199,7 +204,7 @@ footer img {
   text-align: left;
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   transition: 0.2s ease;
-  border: 2px solid rgba(255, 255, 255, 0.299);
+  border: 2px solid var(--borderCard);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -255,4 +260,12 @@ footer img {
   padding: 20px;
   background: var(--bg);
   color: var(--text);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
 }

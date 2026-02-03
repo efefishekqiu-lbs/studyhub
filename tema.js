@@ -21,3 +21,16 @@ function setModeType(type) {
    document.documentElement.setAttribute("data-theme", type);
    document.body.dataset.theme = type;
 }
+
+const tooltipTexts = {
+   [".tema"]: "Ändra färg teman",
+ }
+ 
+ $.each(tooltipTexts, function(k, v) {
+   $(k).tooltipster({
+     content: v,
+     animation: 'fade',
+     delay: 0,
+     speed: 120,
+   });
+ })

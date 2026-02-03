@@ -10,18 +10,7 @@
    box-sizing: border-box;
    font-family: "Exo 2";
    transition: 200ms;
-
 }
-.klasser-remove {
-
-   top: 2.8vh;
-   height: 1.5vw;
-   width:2.5vw;
-   margin-left: 90%;
-   position: absolute;
-}
-
-
 
 :root {
    --bg: #000000;
@@ -29,7 +18,7 @@
    --fill: #ffffff;
    --profilebg: #141414;
    --headerbg: #1a1919;
-   --borderBtm: #303030;
+   --borderBtm: #dbdbdb47;
    --hoverBg: #252424;
    --shadows: rgba(0, 0, 0, 0.17)
  }
@@ -40,7 +29,7 @@
    --fill: #000000;
    --profilebg: #ffff;
    --headerbg: #ffff;
-   --borderBtm: #303030;
+   --borderBtm: #3030303c;
    --hoverBg: #a3a3a3;
    --shadows: rgba(0, 0, 0, 0)
  }
@@ -106,7 +95,7 @@ header {
    width: 100%;
    background-color: var(--headerbg);
    z-index: 10;
-   border-bottom: 1px solid --var(--borderBtm);
+   border-bottom: 1px solid var(--borderBtm);
 }
 
 .burger-menu {
@@ -312,7 +301,7 @@ nav {
    width: 16%;
    height: 91%;
    background-color: var(--bg);
-   border-right: 1px solid --var(--borderBtm);
+   border-right: 1px solid var(--borderBtm);
    display: flex;
    flex-direction: column ;
    align-items: center;
@@ -386,8 +375,20 @@ h1 {
    align-items: flex-start;
    backdrop-filter: blur(11px);
    border-radius: 10px ;
-   border: 1px solid #605e5e;
+   border: 1px solid var(--borderBtm);
+}
 
+.klasser-remove {
+   position: absolute;
+   top: 6.8vh;
+   height: 1.5vw;
+   width:1.5vw;
+   margin-left: 94.6%;
+   display: none;
+}
+
+.klasser-remove:hover {
+   fill: rgba(255, 0, 0, 0.579);
 }
 
 .klasser-wrapper-footerInfo {
@@ -436,3 +437,4 @@ section h2 {
 .notis h4 {
    font-size: 14px;
 }
+

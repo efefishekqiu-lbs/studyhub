@@ -1,0 +1,25 @@
+
+.tooltipstered {
+   cursor: pointer !important;
+ }
+ 
+ .tooltipster-base {
+   margin-top: 5px;
+   transition: all ease-in-out 40ms;
+ }
+ 
+ .tooltipster-box {
+   padding: -5px;
+   background-color: #171717 !important;
+   border: 1px solid #313131 !important;
+ }
+ 
+ .tooltipster-content {
+   font-size: 12px !important;
+   font-weight: 500;
+ }
+ 
+ .tooltipster-arrow-uncropped {
+   display: none !important;
+ }
+ 
