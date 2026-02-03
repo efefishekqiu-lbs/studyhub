@@ -50,7 +50,6 @@ function setHeaderMode(status) {
          "transform": "translate(0, -50%)",
          "width": "2.8vw",
          "height": "2.8vw",
-         "background": "#141414",
          "border-radius": "50%",
          "border-color": "#303030",
       })
@@ -70,8 +69,10 @@ btn.addEventListener("click", () => {
    } else {
       if (localStorage.getItem("theme") == "darkmode") {
          localStorage.setItem("theme", "lightmode");
+         document.querySelector('canvas').style.opacity = "0"
       } else {
          localStorage.setItem("theme", "darkmode");
+         document.querySelector('canvas').style.opacity = "1"
       }
    }
    setModeType(localStorage.getItem("theme"))

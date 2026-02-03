@@ -9,7 +9,8 @@
    user-select: none !important;
    box-sizing: border-box;
    font-family: "Exo 2";
-   color: white;
+   transition: 200ms;
+
 }
 
 :root {
@@ -17,6 +18,10 @@
    --text: #ffffff;
    --fill: #ffffff;
    --profilebg: #141414;
+   --headerbg: #1a1919;
+   --borderBtm: #303030;
+   --hoverBg: #252424;
+   --shadows: rgba(0, 0, 0, 0.17)
  }
  
  [data-theme="lightmode"] {
@@ -24,6 +29,10 @@
    --text: #000000;
    --fill: #000000;
    --profilebg: #ffff;
+   --headerbg: #ffff;
+   --borderBtm: #303030;
+   --hoverBg: #a3a3a3;
+   --shadows: rgba(0, 0, 0, 0)
  }
 
 .opacityLow {
@@ -37,7 +46,7 @@
 
 *::-webkit-scrollbar-track {
    width: 0.5rem;
-   background-color: rgba(66, 66, 66, 0.763);
+   background-color: var(--bg);
 }
 *::-webkit-scrollbar {
    width: 0.2vw;
@@ -75,7 +84,7 @@ main {
    left: 16%;
    overflow-y: auto;
    padding-bottom: 2vh;
-   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+   box-shadow: --var(--shadows) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
    transition: all ease-in 100ms;
 }
 
@@ -85,9 +94,9 @@ header {
    height: 10%;
    backdrop-filter: blur(20px);
    width: 100%;
-   background-color: #1a1919;
+   background-color: var(--headerbg);
    z-index: 10;
-   border-bottom: 1px solid #303030;
+   border-bottom: 1px solid --var(--borderBtm);
 }
 
 .burger-menu {
@@ -144,7 +153,8 @@ header>img {
    width: 2.8vw;
    height: 2.8vw;
    border-radius: 50%;
-   background: --var(--profilebg);
+   background-color: var(--bg);
+   color: var(--text);
    border: 1px solid #303030;
    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px;
    z-index: 99999;
@@ -166,7 +176,7 @@ header>img {
    border-bottom: 1px solid #6a6969;
    border-left: 1px solid #6a6969;
    border-top-right-radius: 8px;
-   background-color: #191919;
+   background-color: var(--bg);
    display: none;
 }
 
@@ -175,7 +185,7 @@ header>img {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   color: #fff;
+   color: var(--text);
    font-size: 16px;
    font-weight: 600;
 }
@@ -187,7 +197,7 @@ header>img {
    transform: translate(-50%);
    font-weight: 500;
    display: none;
-   color: #f2f2f2cc;
+   color: var(--text);
 }
 
 .header-velkommen {
@@ -196,13 +206,10 @@ header>img {
    left: 50%;
    transform: translate(-50%);
    font-weight: 500;
-   color: #ccc;
+   color: var(--text)   ;
    display: none;
 }
 
-white {
-   color: #fff;
-}
 
 .header-profile-secondProfile {
    position: absolute;
@@ -241,6 +248,8 @@ white {
    width: 95%;
    height: 6.2vh;
    margin-bottom: 5px;
+   border-bottom: var(--borderBtm);
+
 }
 
 .header-betyger-betyg>h1 {
@@ -249,7 +258,7 @@ white {
    left: 0vw;
    font-size: 15px;
    font-weight: 400;
-   color: #fff;
+   color: var(--text);
 }
 
 .header-betyger-betyg>h2 {
@@ -258,7 +267,9 @@ white {
    left: 0vw;
    font-size: 14px;
    font-weight: 400;
-   color: #ccc;
+   color: var(--text);
+
+   opacity: 0.6;
 }
 
 .header-betyger-betyg-box {
@@ -287,16 +298,17 @@ nav {
    position: fixed;
    top: 10%;
    left: 0;
+   z-index: 1000000;
    width: 16%;
    height: 91%;
-   background-color: #1a1919;
-   border-right: 1px solid #303030;
+   background-color: var(--bg);
+   border-right: 1px solid --var(--borderBtm);
    display: flex;
    flex-direction: column ;
    align-items: center;
    overflow-y: auto;
    padding-bottom: 2vh;
-   transition: all ease-in 100ms;
+   transition: 200ms;
 }
 
 h1 {
@@ -332,7 +344,7 @@ h1 {
 }
 
 .lektioner:hover {
-   background-color: #252424;
+   background-color: var(--hoverBg);
    opacity: 80%;
 }
 
