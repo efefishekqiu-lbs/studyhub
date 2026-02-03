@@ -16,6 +16,45 @@ $(document).on("click", ".header-profile-exit", function () {
    }, 10);
 })
 
+$(document).on("click", ".add-lektion", async function () {
+  const { value: ipAddress } = await Swal.fire({
+    title: "Lägg till en klass ",
+    input: "text",
+    inputLabel: "Lägg koden för klassen",
+    inputPlaceholder: "12345",
+    showCancelButton: true,
+    theme: "dark",
+    inputValidator: (value) => {
+      if (!value) {
+        return "You need to write something!";
+      }
+    }
+  });
+  if (ipAddress) {
+    Swal.fire(`Your IP address is ${ipAddress}`);
+  }
+})
+
+// $(document).on("click", ".klasser-wrapper", function () {
+//   const clicked = $(this);
+// })
+$(document).on("click", ".klasser-wrapper", function () {
+  const clicked = $(this);
+  const isActive = clicked.hasClass("active");
+
+  $(".klasser-wrapper").find(".klasser-arrow").css("transform", "rotate(0deg)")
+  $(".klasser-wrapper>section>h1").css("color", "#ffffffc0")
+
+  $(".klasser-wrapper-footerInfo").hide();
+  $(".klasser-wrapper").removeClass("active");
+
+  if (isActive) return;
+  clicked.find(".klasser-arrow").css("transform", "rotate(180deg)")
+  clicked.find("section").find("h1").css("color", "#fff")
+  clicked.addClass("active");
+  clicked.find(".klasser-wrapper-footerInfo").show();
+});
+
 function setHeaderMode(status) {
    if (status == true) {
       $(".header-profile-secondProfile").css({
@@ -60,6 +99,7 @@ function setHeaderMode(status) {
 
 const root = document.documentElement;
 const btn = document.querySelector(".tema");
+console.log(btn)
 
 // root.dataset.theme = localStorage.theme || "dark";
 
@@ -69,10 +109,12 @@ btn.addEventListener("click", () => {
    } else {
       if (localStorage.getItem("theme") == "darkmode") {
          localStorage.setItem("theme", "lightmode");
-         document.querySelector('canvas').style.opacity = "0"
+         $("canvas").hide()
+        //  document.querySelector('canvas').style.opacity = "0"
       } else {
          localStorage.setItem("theme", "darkmode");
-         document.querySelector('canvas').style.opacity = "1"
+         $("canvas").show()
+        //  document.querySelector('canvas').style.opacity = "1"
       }
    }
    setModeType(localStorage.getItem("theme"))
