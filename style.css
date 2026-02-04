@@ -75,15 +75,15 @@ body {
 main {
    position: absolute;
    display: flex;
-   top: 15%;
+   top: 13%;
    align-items: center;
    flex-direction: column;
    gap: 25px;
    width: 84%;
+   height: 86%;
    left: 16%;
    overflow-y: auto;
    padding-bottom: 2vh;
-  
    transition: all ease-in 100ms;
 }
 
@@ -94,8 +94,8 @@ header {
    backdrop-filter: blur(20px);
    width: 100%;
    background-color: var(--headerbg);
-   z-index: 10;
    border-bottom: 1px solid var(--borderBtm);
+   z-index: 10;
 }
 
 .burger-menu {
@@ -347,6 +347,11 @@ h1 {
    opacity: 80%;
 }
 
+.lektioner-selected {
+   background-color: var(--hoverBg);
+   opacity: 85%;
+}
+
 .logo-letkioner {
    width: 2vw;
    height: 2vw;
@@ -360,6 +365,26 @@ h1 {
    font-family: 700;
    background-color: #752e9b8e;
    border: 1px solid #752E9B;
+}
+
+.kalender-main {
+   position: absolute;
+   display: flex;
+   top: 10.5%;
+   align-items: center;
+   flex-direction: column;
+   gap: 25px;
+   width: 84%;
+   height: 86%;
+   padding: 30px;
+   padding-top: 12px;
+   left: 16%;
+   overflow-y: auto;
+   padding-bottom: 2vh;
+   transition: all ease-in 100ms;
+   z-index: 9999;
+   /* background-color: red; */
+   display: none;
 }
 
 .klasser-wrapper {
@@ -380,11 +405,12 @@ h1 {
 
 .klasser-remove {
    position: absolute;
-   top: 6.8vh;
+   top: 7.h;
    height: 1.5vw;
    width:1.5vw;
    margin-left: 94.6%;
    display: none;
+   z-index: 9999;
 }
 
 .klasser-remove:hover {
@@ -438,3 +464,137 @@ section h2 {
    font-size: 14px;
 }
 
+.chatbot-wrapper {
+   position: absolute;
+   bottom: 4vh;
+   right: 3vw;
+   width: 3.5vw;
+   height: 3.5vw;
+   border-radius: 50%;
+   border: 1px solid #303030;
+   background-color: var(--bg);
+   backdrop-filter: blur(1px);
+}
+
+.chatbot-wrapper-beforeHover {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: #d2d2d2;
+   opacity: 100%;
+   font-size: 25px;
+   display: block;
+}
+
+.chatbot-wrapper-afterHover {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: #d2d2d2;
+   opacity: 100%;
+   font-size: 25px;
+   display: none;
+}
+
+.custom-swal {
+   background: var(--bg);
+   color: var(--text);
+ }
+
+ .swal-row {
+   display: grid;
+   grid-template-columns: 80px 1fr;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 12px;
+ }
+ 
+ /* Labels */
+ .swal-row label {
+   font-size: 14px;
+   color: var(--text);
+ }
+ 
+ /* Inputs */
+ .swal-row input {
+   padding: 6px 8px;
+   border-radius: 6px;
+   border: 1px solid var(--borderBtm);
+   background: var(--bg);
+   color: var(--text);
+ }
+ 
+ /* Focus */
+ .swal-row input:focus {
+   outline: none;
+   border-color: var(--text);
+ }
+
+
+ .swal2-container {
+   z-index: 9999999 !important;
+
+
+ }
+
+
+ .swal2-popup  {
+   border: 1px solid var(--borderBtm);
+   border-radius: 16px;
+ }
+ 
+ table {
+   /* background-color:  !important; */
+ }
+
+ table, td, th {
+   border-color: var(--borderBtm) !important;
+
+ }
+
+ .fc-button-group > button, .fc-today-button {
+   background-color: var(--headerbg) !important; 
+   border: 1px solid var(--borderBtm) !important;
+   color: var(--text) !important;
+   fill: var(--text) !important;
+ }
+
+ .fc-button-group > button {
+   color: var(--text) !important;
+   fill: var(--text) !important;
+ }
+
+ .fc-button-group > button>span {
+   color: var(--text);
+   fill: var(--text);
+ }
+
+table {
+   border-radius: 5px !important;
+   height: 50vh;
+   overflow-y: auto;
+}
+
+th {
+   font-size: 16px !important;
+   font-family: "Exo 2";
+   font-weight: 500;
+   color: var(--text);
+}
+.fc-header-toolbar {
+
+   position: sticky;
+   top: 0;
+   backdrop-filter: blur(15px);
+   z-index: 9999999;
+   padding: 10px 0;
+   fill: var;
+lli
+}
+
+
+td {
+   padding: 35px;
+}

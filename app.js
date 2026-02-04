@@ -8,6 +8,101 @@ $(document).on("click", ".header-profile", function () {
    //    setHeaderMode(isHeaderOpened);
    }
 });
+let calendar = null;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const calendarEl = document.querySelector(".kalender-main");
+
+  calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: "timeGridWeek",
+    initialDate: new Date(),
+    nowIndicator: true,
+    selectable: true,
+
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "timeGridWeek,dayGridMonth"
+    },
+
+    dateClick: function(info) {
+      openSwal(info);
+    }
+  });
+
+});
+
+// document.addEventListener("click", (e) => {
+//   alert(e.target)
+// })
+
+function openSwal(info) {
+  const dateStr = info.date.toISOString().split("T")[0];
+
+  Swal.fire({
+    title: "Ny händelse",
+    customClass: {
+      popup: "custom-swal"
+    },
+    html: `
+      <div class="swal-row">
+        <label>Titel</label>
+        <input id="swal-title" type="text">
+      </div>
+
+      <div class="swal-row">
+        <label>Start</label>
+        <input id="swal-start" type="time" value="09:00">
+      </div>
+
+      <div class="swal-row">
+        <label>Slut</label>
+        <input id="swal-end" type="time" value="10:00">
+      </div>
+    `,
+    showCancelButton: true,
+    confirmButtonText: "Lägg till",
+    cancelButtonText: "Avbryt",
+    focusConfirm: false,
+    preConfirm: () => {
+      return {
+        title: document.getElementById("swal-title").value,
+        startTime: document.getElementById("swal-start").value,
+        endTime: document.getElementById("swal-end").value
+      };
+    }
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+
+    const { title, startTime, endTime } = result.value;
+    if (!title || !startTime || !endTime) return;
+
+    calendar.addEvent({
+      title,
+      start: `${dateStr}T${startTime}`,
+      end: `${dateStr}T${endTime}`,
+      allDay: false
+    });
+
+    setTimeout(() => {
+      $('.fc-event-main').each(function () {
+        const titleText = $(this).find('.fc-event-title').text().trim();
+        
+        if ($(this).hasClass('tooltipstered')) return;
+    
+        $(this).tooltipster({
+          content: titleText,
+          animation: 'fade',
+          delay: 0,
+          speed: 120
+        });
+      });
+    }, 0);
+  });
+}
+
+
+
 
 $(document).on("click", ".header-profile-exit", function () {
    setTimeout(() => {
@@ -94,7 +189,7 @@ function setHeaderMode(status) {
          "width": "30vw",
          "height": "90vh",
          "border-radius": "25px",
-         "border-top-right-radius": "8px",
+         "border-top-right-radius": "4px",
          "border-color": "#6a6969",
       })
       $(".header-profile-secondProfile").css({
@@ -164,8 +259,33 @@ function setModeType(type) {
    }
 }
 
-let isNavbarActive = true;
+$(document).on("click", ".lektioner", function () {
+  let type = $(this).attr("data-type")
+  let id = $(this).attr("data-id");
 
+  if (type == "selectable") {
+    selectNavbarButton(id);
+  }
+})
+
+function selectNavbarButton(id) {
+  console.log(id)
+  if (id == "startsida") {
+    $(".kalender-main").hide(100)
+    $("main").show(200)
+    $("canvas").show()
+  }
+  if (id == "kalender") {
+    $("main").hide(100)
+    $(".kalender-main").show(200)
+    calendar.render();
+    $("canvas").hide()
+  }
+  $(".lektioner").removeClass("lektioner-selected")
+  $(`.lektioner[data-id="${id}"]`).addClass("lektioner-selected")
+}
+  
+let isNavbarActive = true;
 $(document).on("click", ".burger-menu", function () {
    if (isNavbarActive) {
       isNavbarActive = false;
@@ -193,6 +313,35 @@ $(document).on("click", ".burger-menu", function () {
       $(".lektioner>h1").show()
    }
 });
+
+let isChatBotOpened = false;
+$(document).on("mouseover", ".chatbot-wrapper", function () {
+  if (isChatBotOpened == true) { return }
+  $(".chatbot-wrapper-beforeHover").hide()
+  $(".chatbot-wrapper-afterHover").show()
+})
+$(document).on("mouseleave", ".chatbot-wrapper", function () {
+  if (isChatBotOpened == true) { return }
+  $(".chatbot-wrapper-beforeHover").show()
+  $(".chatbot-wrapper-afterHover").hide()
+})
+
+$(document).on("click", ".chatbot-wrapper", function () {
+  if (isChatBotOpened == false) {
+    isChatBotOpened = true;
+    $(".chatbot-wrapper").css({
+      "position": "absolute",
+      "transform": "none",
+      "width": "30vw",
+      "height": "60vh",
+      "border-radius": "25px",
+      "border-bottom-right-radius": "4px",
+      "border-color": "#6a6969",
+    })
+  } else {
+    isChatBotOpened = false;
+  }
+})
 
 
 
