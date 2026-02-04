@@ -1,18 +1,16 @@
+let isTypingEffectActive = false;
+
 let isHeaderOpened = false;
 $(document).on("click", ".header-profile", function () {
    if (isHeaderOpened == false) {
       isHeaderOpened = true;
       setHeaderMode(isHeaderOpened); 
-   // } else {
-   //    isHeaderOpened = false;
-   //    setHeaderMode(isHeaderOpened);
    }
 });
 let calendar = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   const calendarEl = document.querySelector(".kalender-main");
-
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "timeGridWeek",
     initialDate: new Date(),
@@ -24,17 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
       center: "title",
       right: "timeGridWeek,dayGridMonth"
     },
-
     dateClick: function(info) {
       openSwal(info);
     }
   });
-
 });
-
-// document.addEventListener("click", (e) => {
-//   alert(e.target)
-// })
 
 function openSwal(info) {
   const dateStr = info.date.toISOString().split("T")[0];
@@ -46,17 +38,17 @@ function openSwal(info) {
     },
     html: `
       <div class="swal-row">
-        <label>Titel</label>
+        <label>Rubrik</label>
         <input id="swal-title" type="text">
       </div>
 
       <div class="swal-row">
-        <label>Start</label>
+        <label>Start tid</label>
         <input id="swal-start" type="time" value="09:00">
       </div>
 
       <div class="swal-row">
-        <label>Slut</label>
+        <label>Slut tid</label>
         <input id="swal-end" type="time" value="10:00">
       </div>
     `,
@@ -101,9 +93,6 @@ function openSwal(info) {
   });
 }
 
-
-
-
 $(document).on("click", ".header-profile-exit", function () {
    setTimeout(() => {
       isHeaderOpened = false;
@@ -130,9 +119,6 @@ $(document).on("click", ".add-lektion", async function () {
   }
 })
 
-// $(document).on("click", ".klasser-wrapper", function () {
-//   const clicked = $(this);
-// })
 $(document).on("click", ".klasser-remove", function (event) {
   event.stopPropagation(); 
   let id = $(this).parent().attr("data-id");
@@ -152,7 +138,6 @@ $(document).on("click", ".klasser-remove", function (event) {
         text: "Din fil har tagits bort.",
         icon: "success"
       });
-      console.log(id)
       $(`.klasser-wrapper[data-id="${id}"]`).remove();
       $(`.lektioner[data-id="${id}"]`).remove();
     }
@@ -160,7 +145,12 @@ $(document).on("click", ".klasser-remove", function (event) {
 });
 
 $(document).on("click", ".klasser-wrapper", function () {
-  const clicked = $(this);
+  let id = $(this).attr("data-id")
+  handleKlassWrapper(id)
+});
+
+function handleKlassWrapper(id) {
+  const clicked = $(`.klasser-wrapper[data-id="${id}"]`)
   const isActive = clicked.hasClass("active");
 
   $(".klasser-wrapper").find(".klasser-arrow").css("transform", "rotate(0deg)")
@@ -174,7 +164,7 @@ $(document).on("click", ".klasser-wrapper", function () {
   clicked.find(".klasser-arrow").css("transform", "rotate(180deg)")
   clicked.addClass("active");
   clicked.find(".klasser-wrapper-footerInfo").show();
-});
+}
 
 function setHeaderMode(status) {
    if (status == true) {
@@ -201,7 +191,7 @@ function setHeaderMode(status) {
       })
       $(".header-profile-exist-letter").hide()
       setTimeout(() => {
-         $(".header-email, .header-velkommen, .header-betyger").show()
+         $(".header-email, .header-velkommen, .header-title, .header-betyger").show()
          $(".header-profile-exit").css("display", "flex")
       }, 100);
    } else {
@@ -214,16 +204,13 @@ function setHeaderMode(status) {
          "border-color": "#303030",
       })
       $(".header-profile-exist-letter").show()
-      $(".header-profile-exit, .header-profile-secondProfile, .header-email, .header-velkommen, .header-betyger").hide()
+      $(".header-profile-exit, .header-profile-secondProfile, .header-email, .header-velkommen, .header-title, .header-betyger").hide()
    }
 }
 
 const root = document.documentElement;
 const btn = document.querySelector(".tema");
 const changeSvg = document.querySelector("#tema")
-console.log(btn)
-
-// root.dataset.theme = localStorage.theme || "dark";
 
 $(document).on("click", ".tema", function () {
   if (!localStorage.getItem("theme")) {
@@ -247,7 +234,6 @@ $(document).ready(function() {
 function setModeType(type) {
    document.documentElement.setAttribute("data-theme", type);
    document.body.dataset.theme = type;
-   console.log("hasdasjd")
    if (type == "darkmode") {
     $("canvas").show()
     changeSvg.innerHTML = `<svg stroke="currentColor" class="tema opacityLow" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>`
@@ -255,9 +241,38 @@ function setModeType(type) {
   } else {
     $("canvas").hide()
     changeSvg.innerHTML = `<svg stroke="currentColor" class="tema opacityLow" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>`
-
    }
 }
+
+function smoothScrollTo(targetY, duration = 500) {
+  const startY = window.pageYOffset;
+  const distance = targetY - startY;
+  let startTime = null;
+
+  function animation(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = 0.5 * (1 - Math.cos(Math.PI * progress));
+      window.scrollTo(0, startY + distance * ease);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+  }
+
+  requestAnimationFrame(animation);
+}
+
+$(document).on('click', '.lektioner', function(e) {
+  const target = $(`.klasser-wrapper[data-id="${$(this).attr('data-id')}"]`)
+
+  // const target = $($(this).attr('href'));
+  if (target.length) {
+      e.preventDefault();
+      const headerOffset = 80; // header offset
+      const targetY = target.offset().top - headerOffset;
+      smoothScrollTo(targetY, 500);
+  }
+});
+
 
 $(document).on("click", ".lektioner", function () {
   let type = $(this).attr("data-type")
@@ -266,10 +281,12 @@ $(document).on("click", ".lektioner", function () {
   if (type == "selectable") {
     selectNavbarButton(id);
   }
+  if (type == "clickable") {
+    handleKlassWrapper(id)
+  }
 })
 
 function selectNavbarButton(id) {
-  console.log(id)
   if (id == "startsida") {
     $(".kalender-main").hide(100)
     $("main").show(200)
@@ -326,24 +343,85 @@ $(document).on("mouseleave", ".chatbot-wrapper", function () {
   $(".chatbot-wrapper-afterHover").hide()
 })
 
+$(document).on("click", ".chatbot-wrapper-close", function () {
+  if (isChatBotOpened == false) { return }
+  $(".chatbot-wrapper-close").hide()
+  $(".chatbot-wrapper-beforeHover").show()
+  $(".chatbot-wrapper-afterHover").hide()
+  $(".chatbot-wrapper").addClass("opacityLow")
+  $(".chatbot-wrapper").css({
+    "position": "absolute",
+    "transform": "none",
+    "width": "3.5vw",
+    "height": "3.5vw",
+    "border-radius": "50%",
+    "border-color": "#303030",
+  })
+  $(".chatbot-answer").html("")
+  $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").hide()
+  setTimeout(() => {
+    isChatBotOpened = false;
+  }, 50);
+})
+
 $(document).on("click", ".chatbot-wrapper", function () {
   if (isChatBotOpened == false) {
     isChatBotOpened = true;
+    $(".chatbot-wrapper-close").show(200)
+    $(".chatbot-wrapper-beforeHover").hide()
+    $(".chatbot-wrapper-afterHover").hide()
+    $(".chatbot-wrapper").removeClass("opacityLow")
     $(".chatbot-wrapper").css({
       "position": "absolute",
       "transform": "none",
       "width": "30vw",
-      "height": "60vh",
+      "height": "65vh",
       "border-radius": "25px",
       "border-bottom-right-radius": "4px",
       "border-color": "#6a6969",
     })
-  } else {
-    isChatBotOpened = false;
+    $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").show()
   }
 })
 
+let answersForChatBot = {
+  "activeAssigments": "Du har inga aktiva uppgifter just nu.",  
+  "sommarlov": "Det är sommarlov nu!",                      
+  "howold": "Jag är tidlös",                                
+  "weather": "Vädret är soligt och varmt",                 
+  "clock": ""                                                 
+};
 
+function fillAnswer(id) {
+  if (id === "clock") {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      answersForChatBot.clock = `Klockan är ${hours}:${minutes}`;
+  }
+  return answersForChatBot[id] || "Jag vet inte svar på det.";
+}
+
+function typeText(element, text, speed = 40) {
+    isTypingEffectActive = true
+    let index = 0;
+    $(element).html("");
+    const interval = setInterval(() => {
+        $(element).html($(element).html() + text.charAt(index));
+        index++;
+        if (index >= text.length) { 
+          clearInterval(interval)
+          isTypingEffectActive = false;
+        }
+    }, speed);
+}
+
+$(document).on("click", ".chatbot-wrapper-questionsWrapper-question", function () {
+  if (isTypingEffectActive == true) { return }
+  const id = $(this).attr("data-id");
+  const answer = fillAnswer(id);
+  typeText(".chatbot-answer", answer, 40);
+});
 
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
@@ -518,7 +596,6 @@ const tooltipTexts = {
 }
 
 $.each(tooltipTexts, function(k, v) {
-  console.log(k)
   $(k).tooltipster({
     content: v,
     animation: 'fade',

@@ -314,12 +314,19 @@ footer img {
   color: white;
   text-align: center;
   padding: 60px 8%;
+  height: 42vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
 }
 
 .cta h2 {
   font-size: 32px;
   margin-bottom: 10px;
 }
+
+
 
 .cta p {
   margin-bottom: 20px;

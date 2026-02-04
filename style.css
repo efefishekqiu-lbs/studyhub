@@ -208,6 +208,18 @@ header>img {
    color: var(--text)   ;
    display: none;
 }
+.header-title {
+   position: absolute;
+   top: 31.4vh;
+   left: 1vh;
+   font-size: 16px;
+   font-weight: 700;
+   color: var(--text)   ;
+   display: none;
+   width: 95%;
+   padding-bottom: 10px;
+   border-bottom: 1px solid var(--borderBtm);
+}
 
 
 .header-profile-secondProfile {
@@ -218,8 +230,9 @@ header>img {
    width: 4.8vw;
    height: 4.8vw;
    border-radius: 50%;
-   background: #141414;
+   background: var(--bg);
    border: 1px solid #303030;
+   color: var(--text);
    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px;
    z-index: 99999;
    transition: all ease-in 340ms;
@@ -231,7 +244,7 @@ header>img {
 
 .header-betyger {
    position: absolute;
-   top: 35%;
+   top: 40.5%;
    left: 0;
    width: 100%;
    height: 62%;
@@ -296,6 +309,7 @@ header>img {
 nav {
    position: fixed;
    top: 10%;
+
    left: 0;
    z-index: 1000;
    width: 16%;
@@ -305,9 +319,15 @@ nav {
    display: flex;
    flex-direction: column ;
    align-items: center;
-   overflow-y: auto;
+   overflow-y: hidden;
    padding-bottom: 2vh;
    transition: 200ms;
+}
+
+.lektioner:nth-last-child(1) {
+   position: absolute;
+   z-index: 100;
+   bottom: 25px;
 }
 
 h1 {
@@ -401,11 +421,16 @@ h1 {
    backdrop-filter: blur(10px);
    border-radius: 10px ;
    border: 1px solid var(--borderBtm);
+   cursor: pointer;
+}
+
+.klasser-wrapper:hover {
+   border: 1px solid var(--text);
 }
 
 .klasser-remove {
    position: absolute;
-   top: 7.h;
+   top: 7.4vh;
    height: 1.5vw;
    width:1.5vw;
    margin-left: 94.6%;
@@ -417,14 +442,96 @@ h1 {
    fill: rgba(255, 0, 0, 0.579);
 }
 
+.swal2-confirm {
+   background-color: #2563eb;
+}
+
+
+.swal2-confirm:hover {
+   background-color: #1c48a7;
+}
+
+
 .klasser-wrapper-footerInfo {
    position: relative;
    top: 8vh;
    left: 0;
    width: 100%;
    height: max-content;
+
    /* padding-bottom: 5vh; */
    display: none;
+}
+.klasser-wrapper-alla-uppgifter {
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+   margin: -8px;
+   margin-top: 4px;
+}
+
+.klasser-wrapper-info-uppgift div a {
+   background-color: var(--fill);
+   border-radius: 6px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   width: 50%;
+}
+
+.klasser-wrapper-info-uppgift div a svg {
+   scale: 1.5;
+   fill: black;
+   fill: var(--bg);
+   color: black;
+}
+
+
+.klasser-wrapper-info-uppgift div a:hover svg {
+   scale: 2.1;
+}
+
+.klasser-wrapper-info-uppgift div input {
+   background-color: #2563eb;
+   border-radius: 6px;
+   color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   width: 50%;
+}
+.klasser-wrapper-info-uppgift div input:hover {
+   background-color: #006aff;
+   font-size: 15px;
+   font-weight: 600;
+}
+
+.klasser-wrapper-info-uppgift div {
+
+   width: 40%;
+   display: flex;
+   height: 100%;
+   gap: 15px;
+   justify-content: center;
+}
+
+.klasser-wrapper-info-uppgift {
+   border: 1px solid var(--borderBtm);
+   height: 11vh;
+   margin: 7px;
+   width: 40%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 6px;
+   padding: 9px;
+
+}
+
+.klasser-wrapper-info-uppgift-namn {
+   font-weight: 400;
 }
 
 section {
@@ -473,7 +580,23 @@ section h2 {
    border-radius: 50%;
    border: 1px solid #303030;
    background-color: var(--bg);
-   backdrop-filter: blur(1px);
+}
+
+.chatbot-wrapper-close {
+   position: absolute;
+   top: 2vh;
+   right: 1.6vw;
+   width: 2vw;
+   height: 2vw;
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: var(--headerbg);
+   border: 1px solid var(--borderBtm);
+   color: var(--text);
+   fill: var(--text);
+   display: none;
 }
 
 .chatbot-wrapper-beforeHover {
@@ -481,7 +604,7 @@ section h2 {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   color: #d2d2d2;
+   color: var(--text);
    opacity: 100%;
    font-size: 25px;
    display: block;
@@ -492,11 +615,93 @@ section h2 {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   color: #d2d2d2;
+   color: var(--text);
    opacity: 100%;
    font-size: 25px;
    display: none;
 }
+
+.chatbot-wrapper-questionsWrapper {
+   position: absolute;
+   top: 14%;
+   left: 0;
+   width: 100%;
+   height: 55%;
+   overflow-y: auto;
+   display: none;
+}
+
+.chatbot-wrapper-questionsWrapper-question {
+   position: relative;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 7vh;
+   margin-bottom: 2px;
+   border-bottom: 1px solid var(--borderBtm);
+}
+
+.chatbot-wrapper-questionsWrapper-question:nth-child(1) {
+   border-top: 1px solid var(--borderBtm);
+}
+
+.chatbot-wrapper-questionsWrapper-question>div {
+   position: absolute;
+   top: 50%;
+   left: 0.45vw;
+   transform: translate(0, -50%);
+   background-color: var(--headerbg);
+   border: 1px solid var(--borderBtm);
+   color: var(--text);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 2.2vw;
+   height: 2.2vw;
+   padding: 5px;
+   border-radius: 8px;
+}
+
+.chatbot-wrapper-questionsWrapper-question>span {
+   position: absolute;
+   top: 50%;
+   left: 3vw;
+   transform: translate(0, -50%);
+   color: var(--text);
+   width: max-content;
+   font-size: 14px;
+}
+
+.chatbot-logo {
+   position: absolute;
+   bottom: 6vh;
+   left: 0.2vw;
+   width: 50px;
+   filter: drop-shadow(0px 0px 10px #006aff);
+   display: none;
+}
+
+.chatbot-dots {
+   position: absolute;
+   bottom: 9.3vh;
+   left: 3.1vw;
+   font-size: 40px;
+   color: #ccc;
+   display: none;
+}
+
+.chatbot-answer {
+   position: absolute;
+   bottom: 2.1vh;
+   left: 14%;
+   font-size: 14px;
+   width: 82%;
+   height: 11vh;
+   color: var(--text);
+   display: none;
+}
+
+/* Swal */
 
 .custom-swal {
    background: var(--bg);
@@ -583,15 +788,13 @@ th {
    font-weight: 500;
    color: var(--text);
 }
-.fc-header-toolbar {
 
+.fc-header-toolbar {
    position: sticky;
    top: 0;
    backdrop-filter: blur(15px);
    z-index: 9999999;
    padding: 10px 0;
-   fill: var;
-lli
 }
 
 
