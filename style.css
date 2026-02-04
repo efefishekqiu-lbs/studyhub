@@ -82,7 +82,7 @@ main {
    width: 84%;
    height: 86%;
    left: 16%;
-   max-width: 1500px;
+   max-width: 1900px;
    overflow-y: auto;
    padding-bottom: 2vh;
    transition: all ease-in 100ms;
@@ -768,9 +768,7 @@ section h2 {
    border-radius: 16px;
  }
  
- table {
-   /* background-color:  !important; */
- }
+
 
  table, td, th {
    border-color: var(--borderBtm) !important;
@@ -832,4 +830,31 @@ td {
    background-color: var(--bg);
 
 
+}
+
+@media (max-width: 560px) {
+   nav{
+      display: none;
+      width: 100%;   
+   } 
+   body {
+      display:flex;
+      justify-content: center;
+      
+   }
+   main {
+      width: 100%;
+      left: 0%;
+   }
+   .burger-menu {
+      width: 7vw;
+   }
+   header img {
+      position: absolute;
+      left:50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0;
+   }
 }

@@ -1,3 +1,5 @@
+let w, h, isMobile;
+
 let isTypingEffectActive = false;
 
 let isHeaderOpened = false;
@@ -117,6 +119,11 @@ $(document).on("click", ".add-lektion", async function () {
   if (ipAddress) {
     Swal.fire(`Your IP address is ${ipAddress}`);
   }
+})
+
+$(document).on("click", ".klasser-wrapper-info-uppgift div input", function (event) {
+  event.stopPropagation(); 
+  $(this).remove()
 })
 
 $(document).on("click", ".klasser-remove", function (event) {
@@ -426,7 +433,6 @@ $(document).on("click", ".chatbot-wrapper-questionsWrapper-question", function (
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-let w, h, isMobile;
 let particles = [];
 let particleCount;
 
