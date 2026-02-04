@@ -82,6 +82,7 @@ main {
    width: 84%;
    height: 86%;
    left: 16%;
+   max-width: 1500px;
    overflow-y: auto;
    padding-bottom: 2vh;
    transition: all ease-in 100ms;
@@ -385,6 +386,23 @@ h1 {
    font-family: 700;
    background-color: #752e9b8e;
    border: 1px solid #752E9B;
+}
+
+.fc-timegrid-axis-cushion {
+   position: relative;
+}
+
+.fc-timegrid-axis-cushion::after {
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--bg);
+   width: 100%;
+   content: "dagar   ";
+   transition: 200ms;
 }
 
 .kalender-main {
@@ -800,4 +818,18 @@ th {
 
 td {
    padding: 35px;
+}
+
+.swal2-popup {
+   
+   background-color: var(--bg);
+   color: var(--text);
+
+}
+
+.swal2-popup input{
+   
+   background-color: var(--bg);
+
+
 }
