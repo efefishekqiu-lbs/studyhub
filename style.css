@@ -373,7 +373,7 @@ h1 {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   backdrop-filter: blur(11px);
+   backdrop-filter: blur(10px);
    border-radius: 10px ;
    border: 1px solid var(--borderBtm);
 }
