@@ -138,6 +138,7 @@ async function submitSignup() {
       text: "A unknown error happend",
       confirmButtonText: "OK"
     });
+
   }
 }
 

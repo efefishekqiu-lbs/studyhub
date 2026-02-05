@@ -114,11 +114,13 @@ async function openSwal(info, klassKod) {
 }
 
 function reloadCalender() {
-  if (!calendar) return;
+  console.log(calendar)
+  if (!calendar) return console.log("ARZULAR");
 
   calendar.removeAllEvents();
 
   // accountInfo.calendar bir object olduğu için Object.values ile array'e çevir
+  console.log("LOAD")
   Object.values(accountInfo.calendar).forEach(ev => {
     let start = ev.startTime ? `${ev.dateStr}T${ev.startTime}` : ev.dateStr;
     let end = ev.endTime ? `${ev.dateStr}T${ev.endTime}` : ev.dateStr;
@@ -152,8 +154,6 @@ function reloadCalenderTipsters() {
     });
   });
 }
-
-reloadCalender()
 
 $(document).on("click", ".header-profile-exit", function () {
    setTimeout(() => {
@@ -311,15 +311,27 @@ function setHeaderMode(status) {
          "top": "-20vh",
          "right": "-20vw",
       })
-      $(".header-profile").css({
-         "position": "absolute",
-         "transform": "none",
-         "width": "30vw",
-         "height": "90vh",
-         "border-radius": "25px",
-         "border-top-right-radius": "4px",
-         "border-color": "#6a6969",
-      })
+      if (window.innerWidth < 1040 && window.innerWidth > 560) {
+        $(".header-profile").css({
+          "position": "absolute",
+          "transform": "none",
+          "width": "60vw",
+          "height": "90vh",
+          "border-radius": "25px",
+          "border-top-right-radius": "4px",
+          "border-color": "#6a6969",
+        })
+      } else {
+        $(".header-profile").css({
+          "position": "absolute",
+          "transform": "none",
+          "width": "30vw",
+          "height": "90vh",
+          "border-radius": "25px",
+          "border-top-right-radius": "4px",
+          "border-color": "#6a6969",
+        })
+      }
       $(".header-profile-secondProfile").css({
          "position": "absolute",
          "top": "18vh",
@@ -487,7 +499,9 @@ function selectNavbarButton(id) {
       $("main").hide(100)
       $(".kalender-main").show(200)
       calendar.render();
-      reloadCalender()
+      setTimeout(() => {
+        reloadCalender()
+      }, 200);
       $("canvas").hide()
       if (isNavbarActive) {
         isNavbarActive = false;
@@ -525,6 +539,9 @@ function selectNavbarButton(id) {
         $("main").hide(100);
         $(".kalender-main").show(200);
         calendar.render();
+        setTimeout(() => {
+          reloadCalender()
+        }, 200);
         $("canvas").hide();
       
       
@@ -590,14 +607,14 @@ function reloadClassesData() {
     }
   })
 }
-
+console.log(window.innerWidth)
 if (window.innerWidth < 1040 && window.innerWidth > 560) {
-  console.log(window.innerWidth)
   $("nav").css({ "width": "30%", "z-index": "99999999" });
   $(".burger-menu").css({ width: "30px" });
   $(".logo").css({ left: "40px" })
   $("nav").hide()
-  $("#tema").css({left: "50%"})
+  $(".add-lektion").css({left: "87%"})
+  $(".tema").css({left: "50%"})
   $(".header-profile").css({ width: "40px", height: "40px", "margin-left": "100px"})
   $(".kalender-main").css({ left: "0px", width: "100%"})
   $("main").css({
@@ -760,15 +777,27 @@ $(document).on("click", ".chatbot-wrapper", function () {
       $(".chatbot-wrapper-beforeHover").hide()
       $(".chatbot-wrapper-afterHover").hide()
       $(".chatbot-wrapper").removeClass("opacityLow")
-      $(".chatbot-wrapper").css({
-        "position": "absolute",
-        "transform": "none",
-        "width": "30vw",
-        "height": "65vh",
-        "border-radius": "25px",
-        "border-bottom-right-radius": "4px",
-        "border-color": "#6a6969",
-      })
+      if (window.innerWidth < 1040 && window.innerWidth > 560) {
+        $(".chatbot-wrapper").css({
+          "position": "absolute",
+          "transform": "none",
+          "width": "60vw",
+          "height": "65vh",
+          "border-radius": "25px",
+          "border-bottom-right-radius": "4px",
+          "border-color": "#6a6969",
+        })
+      } else {
+        $(".chatbot-wrapper").css({
+          "position": "absolute",
+          "transform": "none",
+          "width": "30vw",
+          "height": "65vh",
+          "border-radius": "25px",
+          "border-bottom-right-radius": "4px",
+          "border-color": "#6a6969",
+        })
+      }
       $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").show()
     }
   }

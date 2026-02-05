@@ -128,14 +128,14 @@ header>img {
 
 .add-lektion {
    position: absolute;
-   left: 91%;
+   left: 92%;
    top: 38%;
    transition: 200ms ;
 }
 
 .tema {
    position: absolute;
-   left: 88%;
+   left: 89%;
    top: 38%;
    transition: 200ms ;
 }
@@ -775,12 +775,15 @@ section h2 {
    border: 1px solid var(--borderBtm) !important;
    color: var(--text) !important;
    fill: var(--text) !important;
+
  }
 
  .fc-button-group > button {
    color: var(--text) !important;
    fill: var(--text) !important;
- }
+   padding-left: 15px !important;
+   padding-right: 15px !important; 
+}
 
  .fc-button-group > button>span {
    color: var(--text);
@@ -857,6 +860,7 @@ td {
    content: "veckor   ";
    transition: 200ms;    
 }
+
 
 .fc-dayGridMonth-button::after {
 

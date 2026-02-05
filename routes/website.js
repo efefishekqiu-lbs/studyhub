@@ -42,8 +42,9 @@ router.get('/panel', authGuard, async (req, res) => {
 router.post('/addKalender', authGuard, async (req, res) => {
   const userId = req.user.userId;
   try {
-    let { title, startTime, endTime, dateStr } = req.body;
+    const { title, startTime, endTime, dateStr, klassKod } = req.body;
 
+    // Kullanıcıyı çek
     const { data: user, error } = await supabase
       .from('users')
       .select('*')
@@ -53,33 +54,42 @@ router.post('/addKalender', authGuard, async (req, res) => {
     if (error) throw error;
     if (!user) throw new Error("User not found");
 
-    // JSON parse
-    let calendarData = user.calendar ? JSON.parse(user.calendar) : {};
+    // ------------------------
+    // calendar text parse → object
+    // ------------------------
+    let calendarData;
+    try {
+      let parsed = JSON.parse(user.calendar);
+      calendarData = Array.isArray(parsed) ? {} : parsed; // Array ise object yap
+    } catch {
+      calendarData = {};
+    }
 
-    // Yeni ID
-    let newId = generateString(5);
+    // ------------------------
+    // Yeni ID ile event ekle
+    // ------------------------
+    const newId = generateString(5);
     calendarData[newId] = {
       title,
       startTime,
       endTime,
       dateStr,
       id: newId,
+      klassKod
     };
 
-    // Update
-    const { data: updatedUser, error: updateError } = await supabase
+    // ------------------------
+    // Text olarak kaydet
+    // ------------------------
+    const { error: updateError } = await supabase
       .from('users')
-      .update({ calendar: JSON.stringify(calendarData) }) // Supabase jsonb field ise JSON.stringify gerek yok
-      .eq('userId', userId)
-      .select() // Güncellenen satırı geri almak için select ekledik
+      .update({ calendar: JSON.stringify(calendarData) }) // text alan
+      .eq('userId', userId);
 
-    if (updateError) {
-      console.log(updateError)
-      return 
-    };
-    console.log(calendarData, updatedUser)
+    if (updateError) throw updateError;
 
     res.json({ success: true, newData: calendarData[newId] });
+
   } catch (err) {
     console.error(err);
     res.json({ success: false, message: err.message });
@@ -91,8 +101,6 @@ router.post('/addClass', authGuard, async (req, res) => {
   const userId = req.user.userId
   try {
     let { klassKod } = req.body;
-    console.log("KlassKod:", klassKod, "UserId:", userId)
-
     const { data: user, error } = await supabase
       .from('users')
       .select('*')
@@ -105,7 +113,6 @@ router.post('/addClass', authGuard, async (req, res) => {
     let classes = JSON.parse(user.classes)
     
     if (!(klassKod in classes)) { 
-      console.log("Ogiltigt klass kod")
       return res.json({
         success: false,
         message: "Ogiltigt klass kod",
@@ -131,7 +138,6 @@ router.post('/removeClass', authGuard, async (req, res) => {
   const userId = req.user.userId;
   try {
     let { klassKod } = req.body;
-    console.log("KlassKod:", klassKod, "UserId:", userId);
 
     const { data: user, error } = await supabase
       .from('users')
@@ -145,7 +151,6 @@ router.post('/removeClass', authGuard, async (req, res) => {
     let classes = JSON.parse(user.classes);
 
     if (!(klassKod in classes)) { 
-      console.log("Ogiltigt klass kod");
       return res.json({
         success: false,
         message: "Ogiltigt klass kod",
