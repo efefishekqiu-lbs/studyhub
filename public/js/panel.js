@@ -607,7 +607,7 @@ function reloadClassesData() {
     }
   })
 }
-console.log(window.innerWidth)
+
 if (window.innerWidth < 1040 && window.innerWidth > 560) {
   $("nav").css({ "width": "30%", "z-index": "99999999" });
   $(".burger-menu").css({ width: "30px" });
