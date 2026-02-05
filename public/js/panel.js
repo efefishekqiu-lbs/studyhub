@@ -44,71 +44,116 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-function openSwal(info) {
+async function openSwal(info, klassKod) {
   const dateStr = info.date.toISOString().split("T")[0];
 
-  Swal.fire({
-    title: "Ny händelse",
-    customClass: {
-      popup: "custom-swal"
-    },
-    html: `
-      <div class="swal-row">
-        <label>Rubrik</label>
-        <input id="swal-title" type="text">
-      </div>
+  try {
+    const result = await Swal.fire({
+      title: "Ny händelse",
+      customClass: {
+        popup: "custom-swal"
+      },
+      html: `
+        <div class="swal-row">
+          <label>Rubrik</label>
+          <input id="swal-title" type="text">
+        </div>
 
-      <div class="swal-row">
-        <label>Start tid</label>
-        <input id="swal-start" type="time" value="09:00">
-      </div>
+        <div class="swal-row">
+          <label>Start tid</label>
+          <input id="swal-start" type="time" value="09:00">
+        </div>
 
-      <div class="swal-row">
-        <label>Slut tid</label>
-        <input id="swal-end" type="time" value="10:00">
-      </div>
-    `,
-    showCancelButton: true,
-    confirmButtonText: "Lägg till",
-    cancelButtonText: "Avbryt",
-    focusConfirm: false,
-    preConfirm: () => {
-      return {
-        title: document.getElementById("swal-title").value,
-        startTime: document.getElementById("swal-start").value,
-        endTime: document.getElementById("swal-end").value
-      };
-    }
-  }).then((result) => {
+        <div class="swal-row">
+          <label>Slut tid</label>
+          <input id="swal-end" type="time" value="10:00">
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Lägg till",
+      cancelButtonText: "Avbryt",
+      focusConfirm: false,
+      preConfirm: () => {
+        return {
+          title: document.getElementById("swal-title").value,
+          startTime: document.getElementById("swal-start").value,
+          endTime: document.getElementById("swal-end").value
+        };
+      }
+    });
+
     if (!result.isConfirmed) return;
 
     const { title, startTime, endTime } = result.value;
     if (!title || !startTime || !endTime) return;
 
-    calendar.addEvent({
-      title,
-      start: `${dateStr}T${startTime}`,
-      end: `${dateStr}T${endTime}`,
-      allDay: false
+    const res = await fetch("/website/addKalender", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, startTime, endTime, dateStr })
     });
 
-    setTimeout(() => {
-      $('.fc-event-main').each(function () {
-        const titleText = $(this).find('.fc-event-title').text().trim();
-        
-        if ($(this).hasClass('tooltipstered')) return;
+    const data = await res.json();
+    if (!data.success) {
+      swalError("Kalender", data.message);
+      return;
+    }
+  
+    accountInfo.calendar[data.newData.id] = data.newData
+    reloadCalender()
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      icon: "error",
+      title: "Kalender",
+      text: "A unknown error happend",
+      confirmButtonText: "OK"
+    });
+  }
+}
+
+function reloadCalender() {
+  if (!calendar) return;
+
+  calendar.removeAllEvents();
+
+  // accountInfo.calendar bir object olduğu için Object.values ile array'e çevir
+  Object.values(accountInfo.calendar).forEach(ev => {
+    let start = ev.startTime ? `${ev.dateStr}T${ev.startTime}` : ev.dateStr;
+    let end = ev.endTime ? `${ev.dateStr}T${ev.endTime}` : ev.dateStr;
+
+    console.log(ev.title, start, end);
+    calendar.addEvent({
+      title: ev.title,
+      start,
+      end,
+      allDay: false
+    });
+  });
+
+  setTimeout(() => {
+    reloadCalenderTipsters();
+  }, 100);
+}
+
+
+function reloadCalenderTipsters() {
+  $('.fc-event-main').each(function () {
+    const titleText = $(this).find('.fc-event-title').text().trim();
     
-        $(this).tooltipster({
-          content: titleText,
-          animation: 'fade',
-          delay: 0,
-          speed: 120
-        });
-      });
-    }, 0);
+    if ($(this).hasClass('tooltipstered')) return;
+
+    $(this).tooltipster({
+      content: titleText,
+      animation: 'fade',
+      delay: 0,
+      speed: 120
+    });
   });
 }
+
+reloadCalender()
 
 $(document).on("click", ".header-profile-exit", function () {
    setTimeout(() => {
@@ -118,7 +163,7 @@ $(document).on("click", ".header-profile-exit", function () {
 })
 
 $(document).on("click", ".add-lektion", async function () {
-  const { value: ipAddress } = await Swal.fire({
+  const { value: klassKod } = await Swal.fire({
     title: "Lägg till en klass ",
     input: "text",
     inputLabel: "Lägg koden för klassen",
@@ -131,19 +176,57 @@ $(document).on("click", ".add-lektion", async function () {
       }
     }
   });
-  if (ipAddress) {
-    Swal.fire(`Your IP address is ${ipAddress}`);
+  if (klassKod) {
+    
+    try {
+      const res = await fetch("/website/addClass", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          klassKod,
+        })
+      })
+      const data = await res.json()
+      if (!data.success) {
+        swalError("Klass", data.message)
+        return
+      }
+      accountInfo.classes[klassKod] = true;
+      reloadClassesData()
+    } catch (err) {
+      console.error(err)
+      Swal.fire({
+        icon: "error",
+        title: "Kl",
+        text: "A unknown error happend",
+        confirmButtonText: "OK"
+      });
+    }
+
   }
 })
+
+function swalError(title, text) {
+  Swal.fire({
+    icon: "error",
+    title: title,
+    text: text,
+    confirmButtonText: "OK"
+  });
+}
 
 $(document).on("click", ".klasser-wrapper-info-uppgift div input", function (event) {
   event.stopPropagation(); 
   $(this).remove()
 })
 
-$(document).on("click", ".klasser-remove", function (event) {
+$(document).on("click", ".klasser-remove", async function (event) {
   event.stopPropagation(); 
-  let id = $(this).parent().attr("data-id");
+  let klassKod = $(this).parent().attr("data-id");
+
+  // Swal ile onay
   Swal.fire({
     title: "Är du säker?",
     text: "Detta går inte att ångra!",
@@ -153,18 +236,49 @@ $(document).on("click", ".klasser-remove", function (event) {
     cancelButtonColor: "#d33",
     confirmButtonText: "Ja, ta bort det!",
     theme: "dark",
-  }).then((result) => {
+  }).then(async (result) => { 
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Borttagen!",
-        text: "Din fil har tagits bort.",
-        icon: "success"
-      });
-      $(`.klasser-wrapper[data-id="${id}"]`).remove();
-      $(`.lektioner[data-id="${id}"]`).remove();
+      try {
+        Swal.fire({
+          title: "Borttagen!",
+          text: "Din klass har tagits bort.",
+          icon: "success"
+        });
+
+        const res = await fetch("/website/removeClass", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ klassKod })
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+          swalError("Klass", data.message);
+          return;
+        }
+
+        $(`.klasser-wrapper[data-id="${klassKod}"]`).remove();
+        $(`.lektioner[data-id="${klassKod}"]`).remove();
+
+        accountInfo.classes[klassKod] = false;
+
+        reloadClassesData();
+      } catch (err) {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title: "Klass",
+          text: "A unknown error happend",
+          confirmButtonText: "OK"
+        });
+      }
     }
   });
 });
+
 
 $(document).on("click", ".klasser-wrapper", function () {
   let id = $(this).attr("data-id")
@@ -373,6 +487,7 @@ function selectNavbarButton(id) {
       $("main").hide(100)
       $(".kalender-main").show(200)
       calendar.render();
+      reloadCalender()
       $("canvas").hide()
       if (isNavbarActive) {
         isNavbarActive = false;
@@ -397,6 +512,8 @@ function selectNavbarButton(id) {
      </div>`
         $(".lektioner>h1").show()
         $(".lektioner>div").show()
+
+
      } else {
         isNavbarActive = true;
         $(".burger-menu").css("transform", "rotate(0deg)");
@@ -404,10 +521,13 @@ function selectNavbarButton(id) {
         $(".lektioner>h1").show()
      }
     } else {
-      $("main").hide(100)
-      $(".kalender-main").show(200)
-      calendar.render();
-      $("canvas").hide()
+
+        $("main").hide(100);
+        $(".kalender-main").show(200);
+        calendar.render();
+        $("canvas").hide();
+      
+      
     }
   }
   $(".lektioner").removeClass("lektioner-selected")
@@ -416,7 +536,7 @@ function selectNavbarButton(id) {
 
 function reloadClassesData() {
   $(`.lektioner[data-type="clickable"]`).remove()
-  $("main").empty()
+  $(".klasser-wrapper").remove()
   $.each(defaultClasses, function(k, v) {
     if (accountInfo.classes[k] == true) {
       $("nav").append(`
@@ -471,6 +591,24 @@ function reloadClassesData() {
   })
 }
 
+if (window.innerWidth < 1040 && window.innerWidth > 560) {
+  console.log(window.innerWidth)
+  $("nav").css({ "width": "30%", "z-index": "99999999" });
+  $(".burger-menu").css({ width: "30px" });
+  $(".logo").css({ left: "40px" })
+  $("nav").hide()
+  $("#tema").css({left: "50%"})
+  $(".header-profile").css({ width: "40px", height: "40px", "margin-left": "100px"})
+  $(".kalender-main").css({ left: "0px", width: "100%"})
+  $("main").css({
+    width: "100%",
+    left: 0
+  })
+  $(".lektioner").css({
+    top: "210px",
+ })
+}
+
 $(document).ready(function() {
   selectNavbarButton("startsida")
   reloadClassesData()
@@ -482,7 +620,7 @@ $(document).ready(function() {
 
 
 $(document).on("click", ".burger-menu", function () {
-  if (isMobile) {
+  if (isMobile || window.innerWidth < 1060) {
     if (isNavbarActive) {
       isNavbarActive = false;
       $(this).css("transform", "rotate(90deg)");
@@ -508,6 +646,9 @@ $(document).on("click", ".burger-menu", function () {
    
       $(".lektioner>h1").show()
       $(".lektioner>div").show()
+      if (window.innerWidth < 1060 && window.innerWidth > 560) {
+        $("nav").css({ width: "30%" }); 
+      }
    } else {
       isNavbarActive = true;
       $(this).css("transform", "rotate(0deg)");
@@ -516,29 +657,46 @@ $(document).on("click", ".burger-menu", function () {
    }
   } else {
     if (isNavbarActive) {
-       isNavbarActive = false;
-       $(this).css("transform", "rotate(90deg)");
-       $("nav").css({
-          width: "5%",
-       })
-       $("main").css({
-          position: "absolute",
-          left: "3%",
-          width: "97.2%"
-       })
-       $(".lektioner>h1").hide()
+      if (window.innerWidth < 1060 && window.innerWidth > 560) {
+        $(".burger-menu").css({ width: "30px" });
+        $(this).css("transform", "rotate(90deg)");
+        $("nav").css({
+           width: "6.5%",
+        })
+        $("main").css({
+           position: "absolute",
+           left: "3%",
+           width: "97.2%"
+        })
+        $(".lektioner>h1").hide()
+        isNavbarActive = false;
+      } else {
+        isNavbarActive = false;
+        $(this).css("transform", "rotate(90deg)");
+        $("nav").css({
+           width: "5%",
+        })
+        $("main").css({
+           position: "absolute",
+           left: "3%",
+           width: "97.2%"
+        })
+        $(".lektioner>h1").hide()
+      }
     } else {
-       isNavbarActive = true;
-       $(this).css("transform", "rotate(0deg)");
-       $("nav").css({
-          width: "16%",
-       })
-       $("main").css({
-          position: "absolute",
-          left: "16%",
-          width: "84%"
-       })
-       $(".lektioner>h1").show()
+      
+        isNavbarActive = true;
+        $(this).css("transform", "rotate(0deg)");
+        $("nav").css({
+           width: "16%",
+        })
+        $("main").css({
+           position: "absolute",
+           left: "16%",
+           width: "84%"
+        })
+        $(".lektioner>h1").show()
+      
     }
   }
 });

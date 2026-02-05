@@ -118,7 +118,13 @@ async function submitSignup() {
         text: "Allt ser bra ut!",
         confirmButtonText: "OK"
       });
-      window.location.href = data.redirect
+      $("#signupBtn").css({
+        "pointer-events": "auto",
+        "opacity": "100%",
+      })
+      setTimeout(() => {
+        window.location.href = data.redirect
+      }, 500);
     }
   } catch (err) {
     console.error(err)
@@ -126,12 +132,12 @@ async function submitSignup() {
       "pointer-events": "auto",
       "opacity": "100%",
     })
-    notify({
-      label: 'Signup',
-      text: 'A unknown error happend',
-      duration: 5000,
-      type: 'error',
-    })
+    Swal.fire({
+      icon: "error",
+      title: "Signup",
+      text: "A unknown error happend",
+      confirmButtonText: "OK"
+    });
   }
 }
 
@@ -143,6 +149,10 @@ function swalError(title, text) {
     text: text,
     confirmButtonText: "OK"
   });
+  $("#signupBtn").css({
+    "pointer-events": "auto",
+    "opacity": "100%",
+  })
 }
 
 setTimeout(() => {

@@ -39,6 +39,136 @@ router.get('/panel', authGuard, async (req, res) => {
   })
 })
 
+router.post('/addKalender', authGuard, async (req, res) => {
+  const userId = req.user.userId;
+  try {
+    let { title, startTime, endTime, dateStr } = req.body;
+
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('userId', userId)
+      .single();
+
+    if (error) throw error;
+    if (!user) throw new Error("User not found");
+
+    // JSON parse
+    let calendarData = user.calendar ? JSON.parse(user.calendar) : {};
+
+    // Yeni ID
+    let newId = generateString(5);
+    calendarData[newId] = {
+      title,
+      startTime,
+      endTime,
+      dateStr,
+      id: newId,
+    };
+
+    // Update
+    const { data: updatedUser, error: updateError } = await supabase
+      .from('users')
+      .update({ calendar: JSON.stringify(calendarData) }) // Supabase jsonb field ise JSON.stringify gerek yok
+      .eq('userId', userId)
+      .select() // Güncellenen satırı geri almak için select ekledik
+
+    if (updateError) {
+      console.log(updateError)
+      return 
+    };
+    console.log(calendarData, updatedUser)
+
+    res.json({ success: true, newData: calendarData[newId] });
+  } catch (err) {
+    console.error(err);
+    res.json({ success: false, message: err.message });
+  }
+});
+
+
+router.post('/addClass', authGuard, async (req, res) => {
+  const userId = req.user.userId
+  try {
+    let { klassKod } = req.body;
+    console.log("KlassKod:", klassKod, "UserId:", userId)
+
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('userId', userId)
+      .single()
+
+    if (error) throw error;
+    if (!user) throw new Error("User not found");
+
+    let classes = JSON.parse(user.classes)
+    
+    if (!(klassKod in classes)) { 
+      console.log("Ogiltigt klass kod")
+      return res.json({
+        success: false,
+        message: "Ogiltigt klass kod",
+      });
+    }
+    classes[klassKod] = true;
+
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({ classes: JSON.stringify(classes) })
+      .eq('userId', userId);
+
+    if (updateError) throw updateError;
+
+    res.json({ success: true })
+  } catch (err) {
+    console.error(err) 
+    res.json({ success: false, message: err.message })
+  }
+})
+
+router.post('/removeClass', authGuard, async (req, res) => {
+  const userId = req.user.userId;
+  try {
+    let { klassKod } = req.body;
+    console.log("KlassKod:", klassKod, "UserId:", userId);
+
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('userId', userId)
+      .single();
+
+    if (error) throw error;
+    if (!user) throw new Error("User not found");
+
+    let classes = JSON.parse(user.classes);
+
+    if (!(klassKod in classes)) { 
+      console.log("Ogiltigt klass kod");
+      return res.json({
+        success: false,
+        message: "Ogiltigt klass kod",
+      });
+    }
+
+    classes[klassKod] = false;
+
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({ classes: JSON.stringify(classes) })
+      .eq('userId', userId);
+
+    if (updateError) throw updateError;
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.json({ success: false, message: err.message });
+  }
+});
+
+
 router.post('/signup', async (req, res) => {
   try {
     let { email, password, loginType } = req.body;

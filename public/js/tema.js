@@ -72,3 +72,9 @@ const tooltipTexts = {
  
     }
  }
+
+ console.log( document.querySelector("#start-knapp"))
+ document.querySelector("#start-knapp").addEventListener("click", () => {
+  window.location.href = "/website/signup"
+  console.log("works")
+ })

@@ -175,12 +175,15 @@ nav a {
   background-color: var(--bg);
 }
 
-section div button {
+section div #start-knapp{ 
   background-color:#1d4ed8;
   padding: 15px;
   border-radius: 15px;
   cursor: pointer;
+  margin: 10px;
 }
+
+
 
 section div div a {
   text-decoration: underline;
@@ -275,19 +278,19 @@ section div div a {
 }
 
 .card:nth-child(1) {
-  background-image: url("https://cdn.discordapp.com/attachments/1467821691089453079/1468220006369067152/chemical-engineering-assignment.png?ex=6983e2af&is=6982912f&hm=72caf6e07b73e2686e9154176413b707f709c5da3d0c621be9d813a75cf8490f&");
+  /* background-image: url(./static/assets/chemical-engineering-assignment.png); */
   background-position: center;
 }
 .card:nth-child(2) {
-  background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220006717460523/Fotolia_76098516_Subscription_Monthly_M.png?ex=6983e2af&is=6982912f&hm=3fa4282171a2e5e6bac4156d3944401041a09afa6c31099687dea68321013fd2&=&format=webp&quality=lossless&width=810&height=535");
+  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220006717460523/Fotolia_76098516_Subscription_Monthly_M.png?ex=6983e2af&is=6982912f&hm=3fa4282171a2e5e6bac4156d3944401041a09afa6c31099687dea68321013fd2&=&format=webp&quality=lossless&width=810&height=535"); */
   background-position: center;
 }
 .card:nth-child(3) {
-  background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007258259668/wk-Grading-Scale-Change-1024x602.png?ex=6983e2af&is=6982912f&hm=ad22b37a52aeb64452bd68e4c0036ad8f591417e359429150e8838bd41164b8b&=&format=webp&quality=lossless&width=810&height=476");
+  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007258259668/wk-Grading-Scale-Change-1024x602.png?ex=6983e2af&is=6982912f&hm=ad22b37a52aeb64452bd68e4c0036ad8f591417e359429150e8838bd41164b8b&=&format=webp&quality=lossless&width=810&height=476"); */
   background-position: center;
 }
 .card:nth-child(4) {
-  background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007891865660/iStock_000042222888_Medium_160304.png?ex=6983e2b0&is=69829130&hm=0420588339b13efbea1dbb74536fe46507013866f797d0220e3987690258cd30&=&format=webp&quality=lossless&width=800&height=425");
+  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007891865660/iStock_000042222888_Medium_160304.png?ex=6983e2b0&is=69829130&hm=0420588339b13efbea1dbb74536fe46507013866f797d0220e3987690258cd30&=&format=webp&quality=lossless&width=800&height=425"); */
   background-position: center;
 
 
@@ -399,6 +402,7 @@ section div div a {
   overflow: hidden;
   transition: max-height 0.25s ease;
   background-color: var(--bg);
+  text-align: left;
 
 }
 

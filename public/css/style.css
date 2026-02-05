@@ -707,6 +707,7 @@ section h2 {
    bottom: 2.1vh;
    left: 14%;
    font-size: 14px;
+   font-weight: 900;
    width: 82%;
    height: 11vh;
    color: var(--text);
@@ -824,6 +825,51 @@ td {
    background-color: var(--bg);
 
 
+}
+
+
+.fc-today-button {
+   position: relative;
+}
+
+.fc-today-button::after {
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "Idag   ";
+   transition: 200ms;     
+}
+
+.fc-timeGridWeek-button::after {
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "veckor   ";
+   transition: 200ms;    
+}
+
+.fc-dayGridMonth-button::after {
+
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "månader   ";
+   transition: 200ms;  
 }
 
 @media (max-width: 560px) {
@@ -967,46 +1013,5 @@ td {
 
 }
 
-.fc-today-button {
-   position: relative;
-}
 
-.fc-today-button::after {
-   position: absolute;
-   z-index: 900;
-   left: 50%;
-   text-align: center;
-   top: 50%;
-   transform: translate(-50%, -50%);
-   background-color: var(--headerbg);
-   width: 100%;
-   content: "Idag   ";
-   transition: 200ms;     
-}
 
-.fc-timeGridWeek-button::after {
-   position: absolute;
-   z-index: 900;
-   left: 50%;
-   text-align: center;
-   top: 50%;
-   transform: translate(-50%, -50%);
-   background-color: var(--headerbg);
-   width: 100%;
-   content: "veckor   ";
-   transition: 200ms;    
-}
-
-.fc-dayGridMonth-button::after {
-
-   position: absolute;
-   z-index: 900;
-   left: 50%;
-   text-align: center;
-   top: 50%;
-   transform: translate(-50%, -50%);
-   background-color: var(--headerbg);
-   width: 100%;
-   content: "månader   ";
-   transition: 200ms;  
-}
