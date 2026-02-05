@@ -836,7 +836,17 @@ td {
    nav{
       display: none;
       width: 100%;   
+      height: 90vh;
+      overflow-y: auto;
+      z-index: 9999999;
+      overflow-x: hidden;
    } 
+   .chatbot-wrapper {
+      right: 6vw;
+      background-color: var(--hoverBg);
+      border: 1px solid var(--text);
+      padding: 25px;
+   }
    body {
       display:flex;
       justify-content: center;
@@ -857,4 +867,152 @@ td {
       margin: 0;
       padding: 0;
    }
+
+   .klasser-arrow {
+      height: 35px;
+      width: 35px;
+      left: -5%;
+   }
+
+   .klasser-remove {
+      height: 25px;
+      width: 25px;
+      left: -4.3%;
+   }
+
+   .klasser-wrapper-info-uppgift {
+      width: 100%;
+      height: 8vh;
+   }
+
+   .header-profile {
+      
+      height: 45px;
+      width: 45px;
+   }
+   .header-profile-exit {
+      width: 15%;
+   }
+   .tema {
+      left: 72%;
+   }
+   .add-lektion {
+      left: 81%;
+   }
+   .lektioner {
+      background-color: var(--bg);
+      border: 1px solid var(--borderBtm);
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      margin: 5%;
+      top: 7%;
+   } 
+   .lektioner h1 {
+      z-index: 99999 !important;
+      top: 0
+   }
+
+   .lektioner div{
+      display: block;
+      height: 20px;
+      width: 20px;
+   };
+
+   .lektioner svg{
+      height: 100px;
+      width: 100px;
+      background-color: #006aff;
+   }
+   canvas {
+      width: 100%;
+   }
+   .chatbot-wrapper-close {
+      position: absolute;
+      top: 2vh;
+      right: 1.6vw;
+      width: 12%;
+      height: 7%;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--headerbg);
+      border: 1px solid var(--borderBtm);
+      color: var(--text);
+      fill: var(--text);
+      display: none;
+   }
+   .chatbot-wrapper-questionsWrapper-question {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 50px;
+   }
+   .chatbot-wrapper-questionsWrapper-question div{
+      width: 30px;
+      height: 30px;
+   }
+   .chatbot-wrapper-questionsWrapper-question span {
+      left: 10%;
+   }
+   .lektioner:nth-last-child(1) {
+      position: absolute;
+      top: 9%;
+      z-index: 100;
+   }
+   .kalender-main {
+      width: 100%;
+      left: 0;
+   }
+   .kalender-main table {
+      height: 80vh;
+   }
+   .fc-timeGridWeek-view  {
+      height: 80vh;
+   }
+
+}
+
+.fc-today-button {
+   position: relative;
+}
+
+.fc-today-button::after {
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "Idag   ";
+   transition: 200ms;     
+}
+
+.fc-timeGridWeek-button::after {
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "veckor   ";
+   transition: 200ms;    
+}
+
+.fc-dayGridMonth-button::after {
+
+   position: absolute;
+   z-index: 900;
+   left: 50%;
+   text-align: center;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--headerbg);
+   width: 100%;
+   content: "månader   ";
+   transition: 200ms;  
 }

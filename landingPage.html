@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="tooltipsterimport.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="public/css/tooltipster.bundle.min.css">
+  <link rel="icon" type="image/x-icon" href="./public/assets/titleicon.png">
   <script src="/public/js/tooltipster.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
 
@@ -31,47 +33,89 @@
     <p class="subtitle">Ett modernt och enkelt sätt att hålla koll på alla dina studier, uppgifter och kommunikation.</p>
 
     <div class="grid">
-      <div class="card">
+      <div class="card text-xl ">
         <div>
           <h3>Uppgifter</h3>
-          <p>Få tillgång till dina uppgifter, arbeta med dem direkt online och lämna in dem smidigt.</p>
+          <p class="text-center"> Få tillgång till dina uppgifter, arbeta med dem direkt online och lämna in dem smidigt.</p>
         </div>
       </div>
-      <div class="card">
+      <div class="card text-xl ">
         <div>
           <h3>Nyheter</h3>
-          <p>Håll dig uppdaterad med de senaste nyheterna från din klass och skolmiljö.</p>
+          <p class="text-center">Håll dig uppdaterad med de senaste nyheterna från din klass och skolmiljö.</p>
         </div>
       </div>
-      <div class="card">
+      <div class="card text-xl ">
         <div>
           <h3>Betyg</h3>
-          <p>Se dina betyg och följ din utveckling över tid på ett tydligt och lättöverskådligt sätt.</p>
+          <p class="text-center">Se dina betyg och följ din utveckling över tid på ett tydligt och lättöverskådligt sätt.</p>
         </div>
       </div>
-      <div class="card">
+      <div class="card text-xl ">
         <div>
           <h3>Kommunikation i klassen</h3>
-          <p>Ställ frågor, samarbeta med klasskamrater och håll kontakten med lärare på ett smidigt sätt.</p>
+          <p class="text-center">Ställ frågor, samarbeta med klasskamrater och håll kontakten med lärare på ett smidigt sätt.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta">
+  <section class="cta h-[80vh] md:h-[40vh]">
     <h2>Börja med StudyHub redan idag!</h2>
     <p>Registrera dig snabbt och enkelt eller logga in för att ta del av alla funktioner direkt.</p>
     <div>
-
-      <a href="signup.html">Logga in</a> eller <a href="signup.html">Registrera dig</a> för att komma igång
+      <button>Börja redan nu!</button>
+      <div>
+        <a href="signup.html">Logga in</a> eller <a href="signup.html">Registrera dig</a> för att komma igång
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="contact" class="footer">
-    <img src="./public/assets/studyhubfull.png" alt="StudyHub Logo">
-    <p>© 2026 StudyHub – Din plattform för enklare och effektivare studier.</p>
+  <footer id="contact" class="footer h-[80vh] sm:h-[50vh] relative">
+    <h1 class="text-5xl p-5">Ofta frågor</h1>
+    <div class="accordion w-[50%] z-20">
+      <div class="accordion-item">
+        <div class="accordion-header">Varför oss?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <div class="accordion-header">Hur fungerar det?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <div class="accordion-header">Hur registerar man?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="w-full h-[200px] text-center sm:relative absolute flex flex-col items-center justify-between bottom-0">
+      <img src="./public/assets/studyhubfull.png" class="sm:w-[10%] top-0 w-[35%]" alt="StudyHub Logo">
+      <p class="p-4">© 2026 StudyHub – Din plattform för enklare och effektivare studier.</p>
+    </div>
   </footer>
 
   <script src="tema.js"></script>

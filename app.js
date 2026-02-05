@@ -174,7 +174,9 @@ function handleKlassWrapper(id) {
 }
 
 function setHeaderMode(status) {
-   if (status == true) {
+  
+  if (isMobile===false) {
+    if (status == true) {
       $(".header-profile-secondProfile").css({
          "position": "absolute",
          "top": "-20vh",
@@ -213,6 +215,49 @@ function setHeaderMode(status) {
       $(".header-profile-exist-letter").show()
       $(".header-profile-exit, .header-profile-secondProfile, .header-email, .header-velkommen, .header-title, .header-betyger").hide()
    }
+  } else {
+
+    if (status == true) {
+       $(".header-profile-secondProfile").css({
+          "position": "absolute",
+          "top": "-20vh",
+          "right": "-20vw",
+       })
+       $(".header-profile").css({
+          "position": "absolute",
+          "transform": "none",
+          "width": "90vw",
+          "height": "90vh",
+          "border-radius": "25px",
+          "border-top-right-radius": "4px",
+          "border-color": "#6a6969",
+       })
+       $(".header-profile-secondProfile").css({
+          "position": "absolute",
+          "top": "18vh",
+          "left": "50%",
+          "transform": "translate(-50%, -50%)",
+          "display": "flex",
+       })
+       $(".header-profile-exist-letter").hide()
+       setTimeout(() => {
+          $(".header-email, .header-velkommen, .header-title, .header-betyger").show()
+          $(".header-profile-exit").css("display", "flex")
+       }, 100);
+    } else {
+       $(".header-profile").css({
+          "position": "absolute",
+          "transform": "translate(0, -50%)",
+          "width": "45px",
+          "height": "45px",
+          "border-radius": "50%",
+          "border-color": "#303030",
+       })
+       $(".header-profile-exist-letter").show()
+       $(".header-profile-exit, .header-profile-secondProfile, .header-email, .header-velkommen, .header-title, .header-betyger").hide()
+    }
+  }
+
 }
 
 const root = document.documentElement;
@@ -293,6 +338,7 @@ $(document).on("click", ".lektioner", function () {
   }
 })
 
+let isNavbarActive = true;
 function selectNavbarButton(id) {
   if (id == "startsida") {
     $(".kalender-main").hide(100)
@@ -300,42 +346,113 @@ function selectNavbarButton(id) {
     $("canvas").show()
   }
   if (id == "kalender") {
-    $("main").hide(100)
-    $(".kalender-main").show(200)
-    calendar.render();
-    $("canvas").hide()
+    if (isMobile) {
+      $("nav").hide()
+      isNavbarActive = false
+      $("main").hide(100)
+      $(".kalender-main").show(200)
+      calendar.render();
+      $("canvas").hide()
+      if (isNavbarActive) {
+        isNavbarActive = false;
+        $(".burger-menu").css("transform", "rotate(90deg)");
+        $("nav").show();
+        $("nav").css({
+          width: "100%",
+          height: "90vh",
+          position: "absolute",
+          display: "flex"
+  
+       })
+       document.querySelector("nav").innerHTML = `
+       <div class="lektioner" data-id="startsida" data-type="selectable" style="margin-top: 10px;">
+       <div> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg> </div>
+       <h1 onclick="window.location.href='/'">Startsida</h1>
+     </div>
+   
+     <div class="lektioner" data-id="kalender" data-type="selectable">
+     <div> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"></path></svg> </div>
+       <h1>Kalender</h1>
+     </div>`
+        $(".lektioner>h1").show()
+        $(".lektioner>div").show()
+     } else {
+        isNavbarActive = true;
+        $(".burger-menu").css("transform", "rotate(0deg)");
+        $("nav").hide();
+        $(".lektioner>h1").show()
+     }
+    } else {
+      $("main").hide(100)
+      $(".kalender-main").show(200)
+      calendar.render();
+      $("canvas").hide()
+    }
   }
   $(".lektioner").removeClass("lektioner-selected")
   $(`.lektioner[data-id="${id}"]`).addClass("lektioner-selected")
 }
   
-let isNavbarActive = true;
+
 $(document).on("click", ".burger-menu", function () {
-   if (isNavbarActive) {
+  if (isMobile) {
+    if (isNavbarActive) {
       isNavbarActive = false;
       $(this).css("transform", "rotate(90deg)");
+      $("nav").show();
       $("nav").css({
-         width: "5%",
-      })
-      $("main").css({
-         position: "absolute",
-         left: "3%",
-         width: "97.2%"
-      })
-      $(".lektioner>h1").hide()
+        width: "100%",
+        height: "90vh",
+        position: "absolute",
+        display: "flex"
+
+     })
+     document.querySelector("nav").innerHTML = `
+     <h1 style="padding: 25px">Navigering</h1>
+     <div class="lektioner" data-id="startsida" data-type="selectable" style="margin-top: 10px;">
+     <div> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg> </div>
+     <h1 onclick="window.location.href='/'">Startsida</h1>
+   </div>
+ 
+   <div class="lektioner" data-id="kalender" data-type="selectable">
+   <div> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"></path></svg> </div>
+     <h1>Kalender</h1>
+   </div>`
+      $(".lektioner>h1").show()
+      $(".lektioner>div").show()
    } else {
       isNavbarActive = true;
       $(this).css("transform", "rotate(0deg)");
-      $("nav").css({
-         width: "16%",
-      })
-      $("main").css({
-         position: "absolute",
-         left: "16%",
-         width: "84%"
-      })
+      $("nav").hide();
       $(".lektioner>h1").show()
    }
+  } else {
+    if (isNavbarActive) {
+       isNavbarActive = false;
+       $(this).css("transform", "rotate(90deg)");
+       $("nav").css({
+          width: "5%",
+       })
+       $("main").css({
+          position: "absolute",
+          left: "3%",
+          width: "97.2%"
+       })
+       $(".lektioner>h1").hide()
+    } else {
+       isNavbarActive = true;
+       $(this).css("transform", "rotate(0deg)");
+       $("nav").css({
+          width: "16%",
+       })
+       $("main").css({
+          position: "absolute",
+          left: "16%",
+          width: "84%"
+       })
+       $(".lektioner>h1").show()
+    }
+  }
 });
 
 let isChatBotOpened = false;
@@ -372,22 +489,42 @@ $(document).on("click", ".chatbot-wrapper-close", function () {
 })
 
 $(document).on("click", ".chatbot-wrapper", function () {
-  if (isChatBotOpened == false) {
-    isChatBotOpened = true;
-    $(".chatbot-wrapper-close").show(200)
-    $(".chatbot-wrapper-beforeHover").hide()
-    $(".chatbot-wrapper-afterHover").hide()
-    $(".chatbot-wrapper").removeClass("opacityLow")
-    $(".chatbot-wrapper").css({
-      "position": "absolute",
-      "transform": "none",
-      "width": "30vw",
-      "height": "65vh",
-      "border-radius": "25px",
-      "border-bottom-right-radius": "4px",
-      "border-color": "#6a6969",
-    })
-    $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").show()
+  if (isMobile) {
+    if (isChatBotOpened == false) {
+      isChatBotOpened = true;
+      $(".chatbot-wrapper-close").show(200)
+      $(".chatbot-wrapper-beforeHover").hide()
+      $(".chatbot-wrapper-afterHover").hide()
+      $(".chatbot-wrapper").removeClass("opacityLow")
+      $(".chatbot-wrapper").css({
+        "position": "absolute",
+        "transform": "none",
+        "width": "90vw",
+        "height": "65vh",
+        "border-radius": "25px",
+        "border-bottom-right-radius": "4px",
+        "border-color": "#6a6969",
+      })
+      $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").show()
+    }
+  } else {
+    if (isChatBotOpened == false) {
+      isChatBotOpened = true;
+      $(".chatbot-wrapper-close").show(200)
+      $(".chatbot-wrapper-beforeHover").hide()
+      $(".chatbot-wrapper-afterHover").hide()
+      $(".chatbot-wrapper").removeClass("opacityLow")
+      $(".chatbot-wrapper").css({
+        "position": "absolute",
+        "transform": "none",
+        "width": "30vw",
+        "height": "65vh",
+        "border-radius": "25px",
+        "border-bottom-right-radius": "4px",
+        "border-color": "#6a6969",
+      })
+      $(".chatbot-wrapper-questionsWrapper, .chatbot-logo, .chatbot-dots, .chatbot-answer").show()
+    }
   }
 })
 

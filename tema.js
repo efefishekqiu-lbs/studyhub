@@ -35,6 +35,28 @@ const tooltipTexts = {
      setModeType(localStorage.getItem("theme")) 
    }
  })
+
+
+ const items = document.querySelectorAll(".accordion-item");
+
+    items.forEach(item => {
+      const header = item.querySelector(".accordion-header");
+      const content = item.querySelector(".accordion-content");
+
+      header.addEventListener("click", () => {
+        const isOpen = item.classList.contains("active");
+
+        items.forEach(i => {
+          i.classList.remove("active");
+          i.querySelector(".accordion-content").style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          item.classList.add("active");
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    });
  
  function setModeType(type) {
     document.documentElement.setAttribute("data-theme", type);
