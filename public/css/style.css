@@ -325,12 +325,6 @@ nav {
    transition: 200ms;
 }
 
-.lektioner:nth-last-child(1) {
-   position: absolute;
-   z-index: 100;
-   bottom: 25px;
-}
-
 h1 {
    font-weight: 400;
 }

@@ -4,6 +4,8 @@ const path = require('path');
 const archiver = require('archiver');
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
+const defaultClasses = require('../lib/defaultClasses')
+
 const {
   createAuthToken,
   setAuthCookie,
