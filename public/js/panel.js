@@ -414,17 +414,67 @@ function selectNavbarButton(id) {
   $(`.lektioner[data-id="${id}"]`).addClass("lektioner-selected")
 }
 
+function reloadClassesData() {
+  $(`.lektioner[data-type="clickable"]`).remove()
+  $("main").empty()
+  $.each(defaultClasses, function(k, v) {
+    if (accountInfo.classes[k] == true) {
+      $("nav").append(`
+          <div class="lektioner" data-type="clickable" data-id="${k}" style="margin-top: 6px;">
+            <div class="logo-letkioner">${v.label.charAt(0).toUpperCase()}</div>
+            <h1>${v.label}</h1>
+          </div>
+      `)
+      $("main").append(`
+          <div class="klasser-wrapper" data-id="${k}">
+            <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+            <svg stroke="currentColor" class="klasser-remove" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8z"></path><path d="M432 96h-96V72a40 40 0 0 0-40-40h-80a40 40 0 0 0-40 40v24H80a16 16 0 0 0 0 32h17l19 304.92c1.42 26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 0 0 0-32zM192.57 416H192a16 16 0 0 1-16-15.43l-8-224a16 16 0 1 1 32-1.14l8 224A16 16 0 0 1 192.57 416zM272 400a16 16 0 0 1-32 0V176a16 16 0 0 1 32 0zm32-304h-96V72a7.91 7.91 0 0 1 8-8h80a7.91 7.91 0 0 1 8 8zm32 304.57A16 16 0 0 1 320 416h-.58A16 16 0 0 1 304 399.43l8-224a16 16 0 1 1 32 1.14z"></path></svg> 
+            <section>
+               <h1>${v.label}</h1>
+               <h2>${v.teacher}</h2>
+               <div class="klasser-wrapper-element-footer">
+                
+                </div>
+            </section>
+            <div class="klasser-wrapper-footerInfo">
+                <h3>Uppgifter:</h3>
+                <div class="klasser-wrapper-alla-uppgifter">
+                    <div class="klasser-wrapper-info-uppgift">                
+                        <h4 class="klasser-wrapper-info-uppgift-namn">efe tills torsdag</h4>    
+                        <div>
+                            <a href="https://drive.google.com/file/d/1OGL8OrLQVp7ohEFv63xhHWEhXI9NP21b/view?authuser=0&usp=classroom_web" target="_blank">
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                            </a>
+                            <input type="button" value="Lämna in">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      `)
+      $(`.klasser-wrapper[data-id="${k}"]`).find("klasser-wrapper-alla-uppgifter").empty()
+      $.each(v.assignments, function(kk, vv) {
+        $(`.klasser-wrapper[data-id="${k}"]`).find("klasser-wrapper-alla-uppgifter").append(`
+          <div class="klasser-wrapper-info-uppgift" data-id="${kk}">                
+              <h4 class="klasser-wrapper-info-uppgift-namn">${vv.label}</h4>
+              <div>
+                  <a href="${vv.href}" target="_blank">
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+                  </a>
+                  <input type="button" value="Lämna in">
+              </div>
+          </div>
+        `)
+      })
+    }
+  })
+}
+
 $(document).ready(function() {
   selectNavbarButton("startsida")
-  $(`.lektioner[data-type="clickable"]`).remove()
-  $.each(defaultClasses, function(k, v) {
-    $("nav").append(`
-        <div class="lektioner" data-type="clickable" data-id="${k}" style="margin-top: 6px;">
-          <div class="logo-letkioner">${v.label.charAt(0).toUpperCase()}</div>
-          <h1>${v.label}</h1>
-        </div>
-    `)
-  })
+  reloadClassesData()
+
   $(".header-email").html(accountInfo.email)
   $(".header-profile-secondProfile, .header-profile-exist-letter").html(accountInfo.username.charAt(0).toUpperCase())
   $(".header-velkommen").html(`Välkommen <white>${accountInfo.username}</white>!`)

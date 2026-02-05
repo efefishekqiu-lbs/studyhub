@@ -96,6 +96,10 @@ router.post('/signup', async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const userId = generateString(15)
+      let userClasses = {};
+      Object.keys(defaultClasses).forEach((key) => {
+        userClasses[key] = false;
+      });
       const { error: insertError } = await supabase
         .from("users")
         .insert({
@@ -105,7 +109,7 @@ router.post('/signup', async (req, res) => {
           password: hashedPassword,
           assignments: JSON.stringify([]),
           calendar: JSON.stringify([]),
-          classes: JSON.stringify([])
+          classes: JSON.stringify(userClasses),
         });
 
       if (insertError) {
