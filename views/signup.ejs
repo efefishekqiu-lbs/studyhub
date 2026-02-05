@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/fonts.css">
+    <link rel="stylesheet" href="/static/css/signup.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <img src="/static/assets/studyhubfull.png" alt="">
+    <h1 class="signup-label">Signup</h1>
+    <canvas id="bg"></canvas>
+    <div class="signup-wrapper">
+        <h2>Login</h2>
+        <span>Dont have a account? <span class="createButton opacityLow">Create</span></span>
+        <div class="signup-wrapper-inputWrapper" data-type="email">
+            <h4>Email</h4>
+            <input class="inclass" type="email" placeholder="Email" value="efe.fishekqiu@elev.ga.lbs.se">
+        </div>
+        <div class="signup-wrapper-inputWrapper" data-type="password">
+            <h4>Password</h4>
+            <input class="inclass" type="password" placeholder="Password" oncopy="return false" onpaste="return false" oncut="return false">
+        </div>
+        <div class="signup-wrapper-inputWrapper" data-type="repeatPassword">
+            <h4>Repeat Password</h4>
+            <input class="inclass" type="password" placeholder="Repeat Password" value="Testtest" oncopy="return false" onpaste="return false" oncut="return false">
+        </div>
+        <div class="signup-wrapper-inputWrapper">
+            <h4></h4>
+            <button id="signupBtn" data-text="Login" value="Testtest" class="opacityLow inclass">Login</button>
+        </div>
+    </div>
+    <div class="notifications"></div>
+
+    <script src="/static/js/signup.js"></script>
+</body>
+</html>

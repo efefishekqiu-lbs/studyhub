@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyHub</title>
+  <link rel="stylesheet" href="/static/css/landingPage.css">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/tooltipsterimport.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/static/css/tooltipster.bundle.min.css">
+  <link rel="icon" type="image/x-icon" href="/static/assets/titleicon.png">
+  <script src="/static/js/tooltipster.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo"><img src="/static/assets/studyhubfull.png" alt="StudyHub Logo"></div>
+    
+    <nav>
+      <div id="tema">
+        <svg stroke="currentColor" class="tema opacityLow" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+      </div>
+      <a class="btn small" href="/website/signup">Logga in</a>
+    </nav>
+  </header>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <h2>ALLT DU BEHÖVER FÖR DINA STUDIER</h2>
+    <p class="subtitle">Ett modernt och enkelt sätt att hålla koll på alla dina studier, uppgifter och kommunikation.</p>
+
+    <div class="grid">
+      <div class="card text-xl ">
+        <div>
+          <h3>Uppgifter</h3>
+          <p class="text-center"> Få tillgång till dina uppgifter, arbeta med dem direkt online och lämna in dem smidigt.</p>
+        </div>
+      </div>
+      <div class="card text-xl ">
+        <div>
+          <h3>Nyheter</h3>
+          <p class="text-center">Håll dig uppdaterad med de senaste nyheterna från din klass och skolmiljö.</p>
+        </div>
+      </div>
+      <div class="card text-xl ">
+        <div>
+          <h3>Betyg</h3>
+          <p class="text-center">Se dina betyg och följ din utveckling över tid på ett tydligt och lättöverskådligt sätt.</p>
+        </div>
+      </div>
+      <div class="card text-xl ">
+        <div>
+          <h3>Kommunikation i klassen</h3>
+          <p class="text-center">Ställ frågor, samarbeta med klasskamrater och håll kontakten med lärare på ett smidigt sätt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta h-[80vh] md:h-[40vh]">
+    <h2>Börja med StudyHub redan idag!</h2>
+    <p>Registrera dig snabbt och enkelt eller logga in för att ta del av alla funktioner direkt.</p>
+    <div>
+      <button>Börja redan nu!</button>
+      <div>
+        <a href="/website/signup">Logga in</a> eller <a href="/website/signup">Registrera dig</a> för att komma igång
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer h-[80vh] sm:h-[50vh] relative">
+    <h1 class="text-5xl p-5">Ofta frågor</h1>
+    <div class="accordion w-[50%] z-20">
+      <div class="accordion-item">
+        <div class="accordion-header">Varför oss?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <div class="accordion-header">Hur fungerar det?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <div class="accordion-header">Hur registerar man?
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
+        </div>
+        <div class="accordion-content">
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+          <p>Content for section 3.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="w-full h-[200px] text-center sm:relative absolute flex flex-col items-center justify-between bottom-0">
+      <img src="/static/assets/studyhubfull.png" class="sm:w-[10%] top-0 w-[35%]" alt="StudyHub Logo">
+      <p class="p-4">© 2026 StudyHub – Din plattform för enklare och effektivare studier.</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/tema.js"></script>
+</body>
+</html>

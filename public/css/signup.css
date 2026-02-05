@@ -1,0 +1,212 @@
+* {
+   margin: 0;
+   padding: 0;
+   outline: none;
+   border: none;
+   user-select: none !important;
+   box-sizing: border-box;
+   font-family: "Exo 2";
+   transition: 200ms;
+   overflow: hidden;
+}
+:root {
+   --bg: #000000;
+   --text: #ffffff;
+   --fill: #ffffff;
+   --profilebg: #141414;
+   --headerbg: #1a1919;
+   --borderBtm: #dbdbdb47;
+   --hoverBg: #252424;
+   --shadows: rgba(0, 0, 0, 0.17)
+ }
+/* .opacityLow {
+   transition: all ease-in 90ms;
+   cursor: pointer;
+}
+
+.opacityLow:hover {
+   opacity: 60%;
+} */
+
+*::-webkit-scrollbar-track {
+   width: 0.5rem;
+   background-color: var(--bg);
+}
+*::-webkit-scrollbar {
+   width: 0.2vw;
+}
+*::-webkit-scrollbar-thumb {
+   width: 0.1vw;
+   background-color: rgba(111, 111, 111, 0.634);
+}
+
+body {
+   background-color: #000000;
+}
+
+img {
+   position: absolute;
+   top: 20px;
+   left: 50%;
+   transform: translate(-50%);
+   width: 200px;
+}
+
+.signup-label {
+   position: absolute;
+   top: 190px;
+   left: 50%;
+   transform: translate(-50%);
+   width: max-content;
+   font-size: 20px;
+   font-weight: 500;
+   color: #fff;
+}
+
+.signup-wrapper {
+   position: absolute;
+   top: 60%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 28vw;
+   min-height: 10vh;
+   padding: 0.8vw;
+   padding-bottom: 4vh;
+   /* padding-bottom: 2vh; */
+   height: max-content;
+   background-color: #1a1919;
+   border: 1px solid #303030;
+}
+
+.signup-wrapper > h2 {
+   font-weight: 500;
+   font-size: 18px;
+}
+
+.signup-wrapper>span {
+   font-size: 13px;
+   font-weight: 500;
+}
+
+.signup-wrapper > h2,span {
+   color: #fff;
+}
+
+.signup-wrapper-inputWrapper {
+   position: relative;
+   top: 2.4vh;
+   left: 0vw;
+   width: 100%;
+   height: 8.6vh;
+   margin-bottom: 1vh;
+}
+
+.signup-wrapper-inputWrapper>h4 {
+   position: absolute;
+   top: 0vh;
+   left: 0.2vw;
+   height: 30%;
+   font-size: 13px;
+   font-weight: 400;
+   color: #fff;
+}
+
+.inclass {
+   position: absolute;
+   bottom: 0vh;
+   left: 0.2vw;
+   width: 98%;
+   height: 65%;
+   border-radius: 3px;
+}
+
+.signup-wrapper-inputWrapper>input {
+   background-color: #1a1919;
+   border: 1px solid #303030;
+   padding-left: 6px;
+   color: #fff;
+}
+
+.signup-wrapper-inputWrapper>input:focus {
+   border-color: #006aff;
+}
+
+.signup-wrapper-inputWrapper>button {
+   background-color: #1a1919;
+   border: 1px solid #303030;
+   color: #fff;
+   cursor: pointer;
+}
+
+.signup-wrapper-inputWrapper>button:hover {
+   background-color: #006aff;
+   color: #fff;
+   outline: none;
+}
+
+.createButton:hover {
+   color: #006aff;
+   text-decoration: underline;
+   cursor: pointer;
+}
+
+.custom-swal {
+   background: var(--bg);
+   color: var(--text);
+ }
+
+ .swal-row {
+   display: grid;
+   grid-template-columns: 80px 1fr;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 12px;
+ }
+ 
+ /* Labels */
+ .swal-row label {
+   font-size: 14px;
+   color: var(--text);
+ }
+ 
+ /* Inputs */
+ .swal-row input {
+   padding: 6px 8px;
+   border-radius: 6px;
+   border: 1px solid var(--borderBtm);
+   background: var(--bg);
+   color: var(--text);
+ }
+ 
+ /* Focus */
+ .swal-row input:focus {
+   outline: none;
+   border-color: var(--text);
+ }
+
+
+ .swal2-container {
+   z-index: 9999999 !important;
+
+
+ }
+
+
+ .swal2-popup  {
+   border: 1px solid var(--borderBtm);
+   border-radius: 16px;
+ }
+
+ .swal2-popup {
+   
+   background-color: var(--bg);
+   color: var(--text);
+
+}
+
+.swal2-popup input{
+   
+   background-color: var(--bg);
+
+
+}
