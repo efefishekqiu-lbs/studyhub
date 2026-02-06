@@ -60,11 +60,15 @@ Utöver detta har vi även använt:
 ### Lokal installation
 
 1. Klona projektet
-2. Installera beroenden:
+2. Installera nodemon för live server.
+```bash
+   npm install -g nodemon
+```
+3. Installera beroenden:
    ```bash
    npm install
    ```
-3. Starta applikationen:
+4. Starta applikationen:
    ```bash
    nodemon app.js
    ```
@@ -73,5 +77,5 @@ Utöver detta har vi även använt:
 
 Applikationen finns även tillgänglig online:
 
-👉 **[Länk till applikationen]**
+👉 **[\[Länk till applikationen\]](https://studyhub-dusky.vercel.app/)**
 
