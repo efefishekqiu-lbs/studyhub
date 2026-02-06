@@ -86,8 +86,11 @@ Varje kod motsvarar ett specifikt ämne.
 
 **Tillgängliga klasser**
 
-- Idrott (Svenska)
+- Svenska
   Klasskod: ```A7F9K2QX```
+
+- Idrott
+  Klasskod: ```M4Z8L1TR```
 
 - Mentorstid
   Klasskod: ```8TQX3A6M```
