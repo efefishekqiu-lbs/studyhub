@@ -1183,6 +1183,14 @@ td {
   letter-spacing: 0.2px;
 }
 
+.sumarizebot-botIcon {
+  position: absolute;
+  top: 6.5vh !important;
+  left: 1vw !important;
+  width: 150px;
+  filter: drop-shadow(0px 0px 10px #006aff);
+}
+
 .sumarize-bot-close {
   position: absolute;
   top: 2vh;
