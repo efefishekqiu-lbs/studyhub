@@ -73,5 +73,5 @@ Utöver detta har vi även använt:
 
 Applikationen finns även tillgänglig online:
 
-👉 **[Länk till applikationen]**
+👉 **https://studyhub-dusky.vercel.app/**
 
