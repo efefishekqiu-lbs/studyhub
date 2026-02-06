@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const fs = require('fs');
 const archiver = require('archiver');
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
@@ -43,8 +44,6 @@ router.post('/addKalender', authGuard, async (req, res) => {
   const userId = req.user.userId;
   try {
     const { title, startTime, endTime, dateStr, klassKod } = req.body;
-
-    // Kullanıcıyı çek
     const { data: user, error } = await supabase
       .from('users')
       .select('*')
@@ -54,20 +53,14 @@ router.post('/addKalender', authGuard, async (req, res) => {
     if (error) throw error;
     if (!user) throw new Error("User not found");
 
-    // ------------------------
-    // calendar text parse → object
-    // ------------------------
     let calendarData;
     try {
       let parsed = JSON.parse(user.calendar);
-      calendarData = Array.isArray(parsed) ? {} : parsed; // Array ise object yap
+      calendarData = Array.isArray(parsed) ? {} : parsed; 
     } catch {
       calendarData = {};
     }
 
-    // ------------------------
-    // Yeni ID ile event ekle
-    // ------------------------
     const newId = generateString(5);
     calendarData[newId] = {
       title,
@@ -78,12 +71,9 @@ router.post('/addKalender', authGuard, async (req, res) => {
       klassKod
     };
 
-    // ------------------------
-    // Text olarak kaydet
-    // ------------------------
     const { error: updateError } = await supabase
       .from('users')
-      .update({ calendar: JSON.stringify(calendarData) }) // text alan
+      .update({ calendar: JSON.stringify(calendarData) })
       .eq('userId', userId);
 
     if (updateError) throw updateError;
@@ -311,6 +301,23 @@ router.post('/signup', async (req, res) => {
     return res.json({
       success: false,
       message: "Server error"
+    });
+  }
+});
+
+router.post("/readFile", authGuard, async (req, res) => {
+  try {
+    const { fileName } = req.body;
+      const filePath = path.join(__dirname, "files/"+fileName);
+      const payload = fs.readFileSync(filePath, "utf8");
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.send(payload);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Dosya okunurken hata oluştu"
     });
   }
 });

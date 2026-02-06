@@ -14,11 +14,31 @@ function setLoginType(type) {
     $(".signup-wrapper>h2").html("Login")
     $("button").html("Login")
     $(".signup-wrapper>span").html(`Dont have a account? <span class="createButton opacityLow">Create</span>`)
+    if (window.innerWidth > 800) {
+
+      $("#info").css({
+        left: '65%'
+      })
+      $(".signup-wrapper").css({
+        left: '17%'
+      })
+      $("#info-heading").html("Log In")
+    }
+
   } else {
     $(".signup-wrapper-inputWrapper[data-type='repeatPassword']").show();
     $(".signup-wrapper>h2").html("Register")
     $("button").html("Register")
     $(".signup-wrapper>span").html(`I have already a account? <span class="createButton opacityLow">Login</span>`)
+    if (window.innerWidth > 1000) {
+      $("#info").css({
+        left: '0%'
+      })
+      $(".signup-wrapper").css({
+        left: '51%'
+      })
+      $("#info-heading").html("Registrera")
+    }
   }
 }
 
@@ -324,3 +344,24 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
   });
 });
+
+
+function setModeType(type) {
+  document.documentElement.setAttribute("data-theme", type);
+  document.body.dataset.theme = type;
+  console.log("hasdasjd")
+
+}
+
+setModeType(localStorage.getItem("theme"))
+
+$(document).ready(function() {
+  if (localStorage.getItem("theme")) {
+    setModeType(localStorage.getItem("theme")) 
+    if (localStorage.getItem("theme") === "lightmode") {
+      $("canvas").css({
+        "display": "none"
+      }) 
+    }
+  }
+})

@@ -1,0 +1,78 @@
+1. Grupperna får 24 timmar på sig att arbeta med årets case och pitcha sin idé inför juryn på skolan.  Årets case presenteras lokalt på skolan. VIKTIGT! Caset får inte röjas innan hackathonet och får inte heller spridas utanför skolan då lokala hackathons kommer att förekomma vid olika tillfällen på de olika skolorna! 
+
+2. Årets case - Skapa ett innovativt verktyg för lyckade studieresultat som stöttar användaren på resan mot gymnasieexamen.
+Uppdraget går helt enkelt ut på att skapa en hemsida eller app som på olika sätt stöttar användaren att lyckas så bra som möjligt med sina studier. Det kan handla om flera olika aspekter av användarens vardag så länge det tydliga syftet kvarstår. 
+3. Deltagare: De tävlande lagen kan bestå av upp till 5 elever. Det är också möjligt att ställa upp som enskild individ även om det inte rekommenderas.
+
+4. Skolan ansvarar för juryarbetet lokalt på skolan och skickar max 1 bidrag i varje kategori från sin skola. 
+
+Hur lämnas bidrag in?
+Ett (publikt) github.
+Länk skickas in via Google Classroom
+
+Om specifika inställningar, eller program, krävs för att köra ett projekt så ska det specificeras i Github repo:t. Databaser och dyl. skall också laddas upp.
+
+Vad ska inlämningen innehålla:
+Arbetsfiler
+Inlämnings dokumentation utifrån mall. (Se nedan)
+En bild som representerar arbetet
+Om det behövs en video som visar arbetet. Max 1min.
+1280x720. .mp4
+
+På github ska det också specificeras om projektet innehåller externt producerade komponenter såsom; Ramverk, bibliotek, templates av olika slag osv.
+
+För tävlande i bästa helhetslösning:
+Det önskvärt att så många delar av projekten som möjligt är gjorda av gruppen.
+
+
+I andra kategorier så ska självklart den bärande komponenten vara skapad av gruppen.
+
+Tider:
+Ett hackathon är under en kortare tid. 
+Önskvärt är att man som skola utför det här hackathonet på:
+24 timmar, eller
+3 dagar a 8h, eller
+1 vecka.
+
+
+Viktigt att elever faktiskt inte får MER än 24h på sig.
+
+Övrigt:
+Skolan ansvarar för juryarbetet lokalt på skolan och skickar max 1 bidrag i varje kategori från sin skola. Ett bidrag får max tävla i två kategorier.
+Bästa helhetslösning
+Den här kategorin belönar projekt som utmärker sig genom en väl genomförd och genomtänkt helhetslösning. Här bedöms samspelet mellan teknik, funktion och design – hur idé, struktur och användarupplevelse tillsammans skapar en komplett tjänst.
+Det kan handla om en app eller webbtjänst som löser ett verkligt problem på ett effektivt sätt, där allt från backend till gränssnitt hänger ihop i en tydlig helhet. Kanske ligger styrkan i ett stabilt tekniskt genomförande, en tydlig målgruppsanpassning eller en lösning som visar på både kvalitet och omtanke i detaljerna. Kort sagt premieras de bidrag som visar på balans mellan teknik, användbarhet och kreativitet – där helheten är mer än summan av delarna.
+Bästa innovativa idé 
+Den här kategorin belönar projekt som vågar tänka nytt och hitta oväntade lösningar på användarnas behov. Fokus ligger på kreativitet och förmågan att se nya möjligheter. 
+Det kan handla om en tjänst som angriper ett vardagsproblem på ett helt nytt sätt, en app som använder teknik i ett oväntat sammanhang, eller en idé som visar på nytänkande i både funktion och form. Kanske är det något som ingen visste att de behövde – men som känns självklart när man ser det. Kort sagt premieras de bidrag som visar mod, uppfinningsrikedom och förmåga att förvandla en idé till något verkligt nyskapande.
+Bästa AI-tillämpning
+Den här kategorin belönar projekt som på ett kreativt och genomtänkt sätt använder artificiell intelligens som en central del av sin lösning. Fokus ligger på hur AI bidrar till funktion, värde och upplevelse för användaren men också hur AI har använts i skapandet av slutprodukten.
+Det kan handla om maskininlärning som anpassar tjänsten efter användarens beteende, språk- eller bildigenkänning som effektiviserar en process, eller en AI-funktion som gör något helt nytt möjligt. Kanske ligger styrkan i hur AI integrerats naturligt i lösningen – utan att ta över användarupplevelsen. Kort sagt premieras de bidrag som visar förståelse för AI-teknikens möjligheter och använder den för att skapa något verkligt användbart, smart och relevant.
+Bästa användarupplevelse (UX/UI)
+Den här kategorin belönar projekt som utmärker sig genom en genomtänkt, tillgänglig och engagerande användarupplevelse. Här står samspelet mellan funktion, flöde och visuell design i fokus – hur användaren leds, förstår och trivs i tjänsten.
+Det kan handla om en tydlig struktur som gör en komplex funktion enkel, en design som väcker förtroende och känsla, eller små interaktioner som gör helheten levande. Kanske ligger styrkan i detaljerna – där varje knapp, färg och rörelse känns motiverad och användarcentrerad. Kort sagt premieras de bidrag som visar förståelse för användarens perspektiv och som skapar en upplevelse som är lika intuitiv som inspirerande.
+INLÄMNINGSMALL
+Denna kan du som lärare kopiera och ge eleverna
+readme.MD
+
+
+# Namn på projektet
+
+Namn på alla deltagare
+
+### Tävlar i kategori: 
+
+## Projekt & Teknisk- beskrivning
+
+Här skriver ni vad ni har gjort, försök att formulera det så att det blir relevant för kategorin ni tänker att ni tävlar i.
+T.ex. om ni har fokuserat på just UI/UX så är det mer relevant än om ni 
+
+Det ska även ingå en tekniskt beskrivning, där ni beskriver en eller flera tekniska lösningar i projektet. Ni skall beskriva funktionen av den tekniska lösningen och hur den används i projektet. Ju tydligare beskrivning desto enklare att bedöma den tekniska lösningen. Beskrivningen skall vara förståelig även för personer som inte kan programmera.
+
+### Externt producerade komponenter
+
+Här presenterar ni saker som ni har laddat ner och använt för att bygga ert arbete. Beskriv också i vilken utsträckning de behövs för projektet.
+
+### Install
+
+Här skriver ni vad vi i juryn behöver göra för att kunna köra ert program / app / webbsida

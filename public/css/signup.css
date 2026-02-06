@@ -11,13 +11,28 @@
 }
 :root {
    --bg: #000000;
+   --bgSection: rgb(44, 44, 44);
    --text: #ffffff;
    --fill: #ffffff;
    --profilebg: #141414;
    --headerbg: #1a1919;
-   --borderBtm: #dbdbdb47;
+   --borderCard: rgba(255, 255, 255, 0.336);
+   --borderBtm: #303030;
    --hoverBg: #252424;
    --shadows: rgba(0, 0, 0, 0.17)
+ }
+ 
+ [data-theme="lightmode"] {
+   --bg: #ffffff;
+   --text: #000000;
+   --fill: #000000;
+   --profilebg: #ffff;
+   --borderCard: rgba(0, 0, 0, 0.123);
+   --headerbg: #ffff;
+   --borderBtm: #303030;
+   --hoverBg: #a3a3a3;
+   --bgSection: rgb(255, 255, 255);
+   --shadows: rgba(0, 0, 0, 0)
  }
 /* .opacityLow {
    transition: all ease-in 90ms;
@@ -41,12 +56,50 @@
 }
 
 body {
-   background-color: #000000;
+   background-color: var(--bg);
+}
+#info {
+   position: absolute;
+   left: 65%;
+   height: 100vh;
+   width: 35%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   background-image: url("../assets/shutterstock_1958383675-crop.webp");
+   /* background-position: center; */
+   background-size: cover;
+   border-right: 1px solid var(--borderBtm);
+   background-color: rgba(255, 255, 255, 0.3);
+   backdrop-filter: blur(50px);
+   -webkit-backdrop-filter: blur(50px);
+   z-index: 10;
+}
+#info div {
+   height: 100%;
+   width: 100%;
+   backdrop-filter: blur(15px);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+#info h1 {
+   color: black;
+   
+   position: absolute;
+   top: 50%;
+
+   transform: translate(0%, 50%);
+   width: 100%;
+   text-align: center;
+
+   
 }
 
 img {
-   position: absolute;
-   top: 20px;
+   position: relative;
+   top: -30px;
    left: 50%;
    transform: translate(-50%);
    width: 200px;
@@ -60,36 +113,44 @@ img {
    width: max-content;
    font-size: 20px;
    font-weight: 500;
-   color: #fff;
+   color: var(--text);
 }
 
 .signup-wrapper {
    position: absolute;
-   top: 60%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+   top: 50%;
+   left: 17%;
+   transform: translate(0%, -50%);
    width: 28vw;
    min-height: 10vh;
    padding: 0.8vw;
    padding-bottom: 4vh;
    /* padding-bottom: 2vh; */
    height: max-content;
-   background-color: #1a1919;
-   border: 1px solid #303030;
+   background-color: var(--bg);
+   border: 1px solid var(--borderBtm);
+   border-radius: 16px;
+   height: 54vh;
 }
 
 .signup-wrapper > h2 {
    font-weight: 500;
-   font-size: 18px;
+   font-size: 28px;
+   text-align: center;
 }
 
 .signup-wrapper>span {
-   font-size: 13px;
+   font-size: 14px;
    font-weight: 500;
+   text-align: center;
+   position: absolute;
+   left: 50%;
+   margin-top: 5px;
+   transform: translate(-50%);
 }
 
 .signup-wrapper > h2,span {
-   color: #fff;
+   color: var(--text);
 }
 
 .signup-wrapper-inputWrapper {
@@ -99,6 +160,7 @@ img {
    width: 100%;
    height: 8.6vh;
    margin-bottom: 1vh;
+   margin-top: 2vh;
 }
 
 .signup-wrapper-inputWrapper>h4 {
@@ -106,9 +168,9 @@ img {
    top: 0vh;
    left: 0.2vw;
    height: 30%;
-   font-size: 13px;
+   font-size: 16px;
    font-weight: 400;
-   color: #fff;
+   color: var(--text);
 }
 
 .inclass {
@@ -120,11 +182,19 @@ img {
    border-radius: 3px;
 }
 
+.signup-wrapper-inputWrapper:nth-last-child(1) {
+   height: 10vh;
+   position: absolute;
+   transform: translate(-50%, 350%);
+   width: 95%;
+   left: 50%
+}
+
 .signup-wrapper-inputWrapper>input {
-   background-color: #1a1919;
+   background-color: var(--bg);
    border: 1px solid #303030;
    padding-left: 6px;
-   color: #fff;
+   color: var(--text);
 }
 
 .signup-wrapper-inputWrapper>input:focus {
@@ -132,10 +202,11 @@ img {
 }
 
 .signup-wrapper-inputWrapper>button {
-   background-color: #1a1919;
+   background-color: var(--bg);
    border: 1px solid #303030;
-   color: #fff;
+   color: var(--text);
    cursor: pointer;
+
 }
 
 .signup-wrapper-inputWrapper>button:hover {
@@ -186,9 +257,7 @@ img {
 
 
  .swal2-container {
-   z-index: 9999999 !important;
-
-
+   z-index: 9999999 !important;     
  }
 
 
@@ -209,4 +278,29 @@ img {
    background-color: var(--bg);
 
 
+}
+
+@media (max-width: 800px) {
+   #info {
+      display: none;
+   }
+   .signup-wrapper {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 90vh;
+
+   }
+   .signup-wrapper-inputWrapper:nth-last-child(1) {
+      height: 10vh;
+      position: absolute;
+      transform: translate(-50%, 650%);
+      width: 95%;
+      left: 50%
+   }
+
+   .signup-wrapper-inputWrapper {
+      margin-top: 7%;
+   }
 }

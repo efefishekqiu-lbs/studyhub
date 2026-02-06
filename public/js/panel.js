@@ -113,6 +113,28 @@ async function openSwal(info, klassKod) {
   }
 }
 
+$(document).on("click", ".sumarize-bot-minimize", function() {
+  console.log($(".sumarize-bot-minimize").css("transform"))
+  if ($(".sumarize-bot-minimize").css("transform") == "matrix(-1, 0, 0, -1, 0, 0)") {
+    $(this).parent().css({ height: "100%"})
+    $(this).parent().css({ bottom: "0%"})
+    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText").css({opacity: "100%"})
+    $(this).parent().css({ width: "100%", left: "0%", "border-radius": "6px"})
+    $(".sumarize-bot-minimize").css({ left: "97%", "transform": "rotate(0deg)"})
+    $(".sumarize-bot-close").css({ display: "block"}) 
+  } else {
+
+    $(this).parent().css({ height: "10vh"})
+    $(this).parent().css({ bottom: "2%"})
+    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText").css({opacity: "0"})
+    $(this).parent().css({ width: "80%", left: "10%", "border-radius": "30px"})
+    $(".sumarize-bot-minimize").css({ left: "90%", "transform": "rotate(180deg)"})
+    $(".sumarize-bot-close").css({ display: "none"})
+  }
+
+})
+
+
 function reloadCalender() {
   console.log(calendar)
   if (!calendar) return console.log("ARZULAR");
@@ -216,11 +238,6 @@ function swalError(title, text) {
     confirmButtonText: "OK"
   });
 }
-
-$(document).on("click", ".klasser-wrapper-info-uppgift div input", function (event) {
-  event.stopPropagation(); 
-  $(this).remove()
-})
 
 $(document).on("click", ".klasser-remove", async function (event) {
   event.stopPropagation(); 
@@ -552,61 +569,60 @@ function selectNavbarButton(id) {
 }
 
 function reloadClassesData() {
-  $(`.lektioner[data-type="clickable"]`).remove()
-  $(".klasser-wrapper").remove()
+  $(`.lektioner[data-type="clickable"]`).remove();
+  $(".klasser-wrapper").remove();
+
   $.each(defaultClasses, function(k, v) {
     if (accountInfo.classes[k] == true) {
       $("nav").append(`
-          <div class="lektioner" data-type="clickable" data-id="${k}" style="margin-top: 6px;">
-            <div class="logo-letkioner">${v.label.charAt(0).toUpperCase()}</div>
-            <h1>${v.label}</h1>
-          </div>
-      `)
-      $("main").append(`
-          <div class="klasser-wrapper" data-id="${k}">
-            <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>
-            <svg stroke="currentColor" class="klasser-remove" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8z"></path><path d="M432 96h-96V72a40 40 0 0 0-40-40h-80a40 40 0 0 0-40 40v24H80a16 16 0 0 0 0 32h17l19 304.92c1.42 26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 0 0 0-32zM192.57 416H192a16 16 0 0 1-16-15.43l-8-224a16 16 0 1 1 32-1.14l8 224A16 16 0 0 1 192.57 416zM272 400a16 16 0 0 1-32 0V176a16 16 0 0 1 32 0zm32-304h-96V72a7.91 7.91 0 0 1 8-8h80a7.91 7.91 0 0 1 8 8zm32 304.57A16 16 0 0 1 320 416h-.58A16 16 0 0 1 304 399.43l8-224a16 16 0 1 1 32 1.14z"></path></svg> 
-            <section>
-               <h1>${v.label}</h1>
-               <h2>${v.teacher}</h2>
-               <div class="klasser-wrapper-element-footer">
-                
-                </div>
-            </section>
-            <div class="klasser-wrapper-footerInfo">
-                <h3>Uppgifter:</h3>
-                <div class="klasser-wrapper-alla-uppgifter">
-                    <div class="klasser-wrapper-info-uppgift">                
-                        <h4 class="klasser-wrapper-info-uppgift-namn">efe tills torsdag</h4>    
-                        <div>
-                            <a href="https://drive.google.com/file/d/1OGL8OrLQVp7ohEFv63xhHWEhXI9NP21b/view?authuser=0&usp=classroom_web" target="_blank">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
-                            </a>
-                            <input type="button" value="Lämna in">
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
+        <div class="lektioner" data-type="clickable" data-id="${k}" style="margin-top: 6px;">
+          <div class="logo-letkioner">${v.label.charAt(0).toUpperCase()}</div>
+          <h1>${v.label}</h1>
         </div>
-      `)
-      $(`.klasser-wrapper[data-id="${k}"]`).find("klasser-wrapper-alla-uppgifter").empty()
-      $.each(v.assignments, function(kk, vv) {
-        $(`.klasser-wrapper[data-id="${k}"]`).find("klasser-wrapper-alla-uppgifter").append(`
-          <div class="klasser-wrapper-info-uppgift" data-id="${kk}">                
-              <h4 class="klasser-wrapper-info-uppgift-namn">${vv.label}</h4>
-              <div>
-                  <a href="${vv.href}" target="_blank">
-                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
-                  </a>
-                  <input type="button" value="Lämna in">
-              </div>
+      `);
+
+      $("main").append(`
+        <div class="klasser-wrapper" data-id="${k}">
+          <svg class="klasser-arrow" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path>
+          </svg>
+          <svg stroke="currentColor" class="klasser-remove" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8z"></path>
+            <path d="M432 96h-96V72a40 40 0 0 0-40-40h-80a40 40 0 0 0-40 40v24H80a16 16 0 0 0 0 32h17l19 304.92c1.42 26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 0 0 0-32zM192.57 416H192a16 16 0 0 1-16-15.43l-8-224a16 16 0 1 1 32-1.14l8 224A16 16 0 0 1 192.57 416zM272 400a16 16 0 0 1-32 0V176a16 16 0 0 1 32 0zm32-304h-96V72a7.91 7.91 0 0 1 8-8h80a7.91 7.91 0 0 1 8 8zm32 304.57A16 16 0 0 1 320 416h-.58A16 16 0 0 1 304 399.43l8-224a16 16 0 1 1 32 1.14z"></path>
+          </svg>
+          <section>
+            <h1>${v.label}</h1>
+            <h2>${v.teacher}</h2>
+            <div class="klasser-wrapper-element-footer"></div>
+          </section>
+          <div class="klasser-wrapper-footerInfo">
+            <h3>Uppgifter:</h3>
+            <div class="klasser-wrapper-alla-uppgifter"></div>
           </div>
-        `)
-      })
+        </div>
+      `);
+
+      // assignment ekleme
+      $.each(v.assignments, function(kk, vv) {
+        $(`.klasser-wrapper[data-id="${k}"]`).find(".klasser-wrapper-alla-uppgifter").append(`
+          <div class="klasser-wrapper-info-uppgift" data-id="${kk}">
+            <h4 class="klasser-wrapper-info-uppgift-namn">${vv.label}</h4>
+            <div>
+              <a href="${vv.href}" target="_blank">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path>
+                </svg>
+              </a>
+              <input type="button" data-file="${vv.file}" data-type="analyze" value="Analysera">
+              <input type="button" data-file="${vv.file}" data-type="submit value="Lämna in">
+            </div>
+          </div>
+        `);
+      });
     }
-  })
+  });
 }
+
 
 if (window.innerWidth < 1040 && window.innerWidth > 560) {
   $("nav").css({ "width": "30%", "z-index": "99999999" });
@@ -821,15 +837,27 @@ function fillAnswer(id) {
   return answersForChatBot[id] || "Jag vet inte svar på det.";
 }
 
-function typeText(element, text, speed = 40) {
+let typeInterval = null;
+function stopTypingEffect() {
+  if (typeInterval) {
+    clearInterval(typeInterval);
+    typeInterval = null;
+    setTimeout(() => {
+      $('.sumarize-bot-sumarizedText').html('')
+    }, 100);
+  }
+}
+
+function typeText(element, text, type, speed = 40) {
     isTypingEffectActive = true
     let index = 0;
     $(element).html("");
-    const interval = setInterval(() => {
+    typeInterval = setInterval(() => {
         $(element).html($(element).html() + text.charAt(index));
         index++;
         if (index >= text.length) { 
-          clearInterval(interval)
+          clearInterval(typeInterval)
+          typeInterval = null;
           isTypingEffectActive = false;
         }
     }, speed);
@@ -839,7 +867,7 @@ $(document).on("click", ".chatbot-wrapper-questionsWrapper-question", function (
   if (isTypingEffectActive == true) { return }
   const id = $(this).attr("data-id");
   const answer = fillAnswer(id);
-  typeText(".chatbot-answer", answer, 40);
+  typeText(".chatbot-answer", answer, 'chatbot', 40);
 });
 
 const canvas = document.getElementById("bg");
@@ -1021,3 +1049,39 @@ $.each(tooltipTexts, function(k, v) {
     speed: 120,
   });
 })
+
+$(document).on("click", ".sumarize-bot-close", function (event) {
+  event.stopPropagation();
+  $('.sumarize-bot').hide(200)
+  $(".sumarize-bot-sumarizedText").html("")
+  stopTypingEffect()
+})
+
+$(document).on("click", ".klasser-wrapper-info-uppgift div input", function (event) {
+  event.stopPropagation(); 
+  let type = $(this).attr("data-type");
+  if (type == "analyze") {
+    sumarizeFile($(this).attr("data-file"))
+  }
+})
+
+async function sumarizeFile(fileName) {
+  $('.sumarizebot-postAnswer').hide()
+  $('.sumarize-bot').show(200)
+  $('.sumarize-bot-loading').show()
+  const res = await fetch("/website/readFile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ fileName })
+  });
+  const content = await res.text(); 
+  const response = await puter.ai.chat(
+    "Du ska analysera och sammanfatta följande dokument. Börja direkt med innehållet, utan någon introduktion eller förklaring\n\n" + content,
+    { model: "gpt-5-nano" }
+  );
+  typeText(".sumarize-bot-sumarizedText", response.message.content, 'sumarizebot', 5);
+  $('.sumarize-bot-loading').hide()
+  $('.sumarizebot-postAnswer').show(100)
+}
