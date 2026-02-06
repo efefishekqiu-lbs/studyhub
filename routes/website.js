@@ -305,6 +305,50 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+router.post('/submitFile', authGuard, async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const { fileName, lektion } = req.body;
+    if (!fileName) {
+      return res.json({ success: false, message: "fileName missing" });
+    }
+
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('assignments')
+      .eq('userId', userId)
+      .single();
+
+    if (error) throw error;
+    if (!user) throw new Error("User not found");
+
+    let assignments;
+
+    try {
+      const parsed = JSON.parse(user.assignments);
+      assignments = Array.isArray(parsed) ? {} : parsed;
+    } catch {
+      assignments = {};
+    }
+
+    assignments[fileName] = lektion;
+
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({ assignments: JSON.stringify(assignments) })
+      .eq('userId', userId);
+
+    if (updateError) throw updateError;
+
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error("submitFile error:", err);
+    res.json({ success: false, message: err.message });
+  }
+});
+
 router.post("/readFile", authGuard, async (req, res) => {
   try {
     const { fileName } = req.body;

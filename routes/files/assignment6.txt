@@ -1,0 +1,9 @@
+Vibecode: Analys
+Skriv en kort analys där du jämför:AI:s kod (version 1–3) ifrån din klasskamrat med din egna och de ändringar du behövde göra.
+Vad fungerade bra i AI:s kod?
+Vad var svårt att förstå eller ändra?
+Var vad för skillnader kan du se mellan din och din klasskompis kod?
+Såg du några förbättringar när du jämförde dem?
+Vad kan du ta med dig från AI:s kod till ditt eget arbete framåt?
+Vilka risker finns det med att alltid förlita sig på AI-genererad kod?
+Var AI:s kod lättare eller svårare att förstå än den kod du sett eller skrivit tidigare?

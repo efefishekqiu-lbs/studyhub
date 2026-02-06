@@ -113,26 +113,141 @@ async function openSwal(info, klassKod) {
   }
 }
 
-$(document).on("click", ".sumarize-bot-minimize", function() {
-  console.log($(".sumarize-bot-minimize").css("transform"))
-  if ($(".sumarize-bot-minimize").css("transform") == "matrix(-1, 0, 0, -1, 0, 0)") {
-    $(this).parent().css({ height: "100%"})
-    $(this).parent().css({ bottom: "0%"})
-    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText").css({opacity: "100%"})
-    $(this).parent().css({ width: "100%", left: "0%", "border-radius": "6px"})
-    $(".sumarize-bot-minimize").css({ left: "97%", "transform": "rotate(0deg)"})
-    $(".sumarize-bot-close").css({ display: "block"}) 
+$(document).on("click", ".sumarize-bot-minimize", function () {
+  const $btn = $(this)
+  const $bot = $btn.parent()
+  const isOpen = $bot.hasClass("open")
+
+  if (!isOpen) {
+    $bot.addClass("open")
+
+    $bot.css({
+      height: "100%",
+      bottom: "0%",
+      width: "100%",
+      left: "0%",
+      "border-radius": "6px"
+    })
+
+    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
+      .css({ opacity: "100%" })
+
+    $(".sumarize-bot-close").show()
+    $(".sumarize-bot-sumarizedText-notify").css({ opacity: "0" })
+
+    $btn.css({
+      transform: "rotate(0deg)",
+      width: "40px",
+      height: "40px",
+      left: isMobile ? "80%" : "87%"
+    })
+    $(".sumarize-bot-close").css({
+      left: isMobile ? "88%" : "92%"  
+    })
+
   } else {
+    $bot.removeClass("open")
 
-    $(this).parent().css({ height: "10vh"})
-    $(this).parent().css({ bottom: "2%"})
-    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText").css({opacity: "0"})
-    $(this).parent().css({ width: "80%", left: "10%", "border-radius": "30px"})
-    $(".sumarize-bot-minimize").css({ left: "90%", "transform": "rotate(180deg)"})
-    $(".sumarize-bot-close").css({ display: "none"})
+    $bot.css({
+      height: "10vh",
+      bottom: "2%",
+      width: "80%",
+      left: "10%",
+      "border-radius": "30px",
+      display: "flex",
+      "align-items": "center"
+    })
+
+    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
+      .css({ opacity: "0" })
+
+    $(".sumarize-bot-close").hide()
+    $(".sumarize-bot-sumarizedText-notify").css({ opacity: "1" })
+
+    if ($(".sumarize-bot-sumarizedText").html() === "") {
+      $(".sumarize-bot-sumarizedText-notify").text("analyserar")
+    }
+
+    $btn.css({
+      transform: "rotate(180deg)",
+      left: isMobile ? "80%" : "92%"
+    })
+
   }
-
 })
+
+function reloadBetyg() {
+  const results = {};
+  Object.entries(accountInfo.classes).forEach(([classCode, isInClass]) => {
+    if (!isInClass) return; 
+
+    const classData = defaultClasses[classCode];
+    if (!classData || !classData.assignments) return;
+    const totalAssignments = Object.keys(classData.assignments).length;
+    let submittedCount = 0;
+
+    Object.entries(accountInfo.assignments).forEach(([fileName, submittedClassCode]) => {
+      if (submittedClassCode === classCode) {
+        submittedCount++;
+      }
+    });
+
+    const percent =
+      totalAssignments === 0
+        ? 0
+        : Math.round((submittedCount / totalAssignments) * 100);
+
+    results[classCode] = {
+      label: classData.label,
+      totalAssignments,
+      submittedCount,
+      percent
+    };
+  });
+
+  $(".header-betyger").html("")
+  $.each(results, function(k, v) {
+    let style = "";
+
+    if (v.percent <= 50) {
+      style = `
+        <div class="header-betyger-betyg-box betyg-rod">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"></path>
+          </svg>
+        </div>
+      `;
+    } else if (v.percent <= 75) {
+      style = `
+        <div class="header-betyger-betyg-box betyg-gul">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M376.2 224H268l52.4-186.9c.9-4.5-4.6-7.1-7.2-3.4L129.5 274.6c-3.8 5.6-.2 13.4 6.3 13.4H244l-52.4 186.9c-.9 4.5 4.6 7.1 7.2 3.4l183.7-240.8c3.7-5.7.2-13.5-6.3-13.5z"></path>
+          </svg>
+        </div>
+      `;
+    } else {
+      style = `
+        <div class="header-betyger-betyg-box">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+          </svg>
+        </div>
+      `;
+    }
+
+    
+    $(".header-betyger").append(`
+      <div class="header-betyger-betyg">
+        <h1>${v.label}</h1>
+        <h2>${defaultClasses[k].teacher}</h2>
+        ${style}
+      </div>
+    `)
+    console.log(k, v)
+  })
+
+  return results;
+}
 
 
 function reloadCalender() {
@@ -436,6 +551,7 @@ $(document).on("click", ".tema", function () {
 });
 
 $(document).ready(function() {
+  reloadBetyg()
   if (localStorage.getItem("theme")) {
     setModeType(localStorage.getItem("theme"))
   }
@@ -604,6 +720,11 @@ function reloadClassesData() {
 
       // assignment ekleme
       $.each(v.assignments, function(kk, vv) {
+        let buttonClass = ""
+        if (accountInfo.assignments[vv.file]) {
+          buttonClass = `uppgifterDone` 
+        }
+        
         $(`.klasser-wrapper[data-id="${k}"]`).find(".klasser-wrapper-alla-uppgifter").append(`
           <div class="klasser-wrapper-info-uppgift" data-id="${kk}">
             <h4 class="klasser-wrapper-info-uppgift-namn">${vv.label}</h4>
@@ -613,8 +734,8 @@ function reloadClassesData() {
                   <path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path>
                 </svg>
               </a>
-              <input type="button" data-file="${vv.file}" data-type="analyze" value="Analysera">
-              <input type="button" data-file="${vv.file}" data-type="submit value="Lämna in">
+              <input class="uppgifter ${buttonClass}" type="button" data-lektion="${k}" data-file="${vv.file}" data-type="analyze" value="Analysera">
+              <input class="uppgifter ${buttonClass}" type="button" data-lektion="${k}" data-file="${vv.file}" data-type="submit" value="Lämna in">
             </div>
           </div>
         `);
@@ -849,18 +970,23 @@ function stopTypingEffect() {
 }
 
 function typeText(element, text, type, speed = 40) {
+  return new Promise(resolve => {
     isTypingEffectActive = true
-    let index = 0;
-    $(element).html("");
+    let index = 0
+    $(element).html("")
+
     typeInterval = setInterval(() => {
-        $(element).html($(element).html() + text.charAt(index));
-        index++;
-        if (index >= text.length) { 
-          clearInterval(typeInterval)
-          typeInterval = null;
-          isTypingEffectActive = false;
-        }
-    }, speed);
+      $(element).html($(element).html() + text.charAt(index))
+      index++
+
+      if (index >= text.length) {
+        clearInterval(typeInterval)
+        typeInterval = null
+        isTypingEffectActive = false
+        resolve()
+      }
+    }, speed)
+  })
 }
 
 $(document).on("click", ".chatbot-wrapper-questionsWrapper-question", function () {
@@ -1063,25 +1189,63 @@ $(document).on("click", ".klasser-wrapper-info-uppgift div input", function (eve
   if (type == "analyze") {
     sumarizeFile($(this).attr("data-file"))
   }
+  if (type == "submit") {
+    submitFile($(this).attr("data-file"), $(this).attr("data-lektion"))
+  }
 })
+
+async function submitFile(fileName, lektion) {
+  const res = await fetch("/website/submitFile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ fileName: fileName, lektion: lektion })
+  });
+  let response = await res.json()
+  if (response.success == true) {
+    $(`.uppgifter[data-file="${fileName}"]`).addClass("uppgifterDone")
+    accountInfo.assignments[fileName] = true;
+    reloadBetyg()
+  }
+  console.log(response)
+}
 
 async function sumarizeFile(fileName) {
   $('.sumarizebot-postAnswer').hide()
   $('.sumarize-bot').show(200)
   $('.sumarize-bot-loading').show()
+
+  // visa status direkt
+  $(".sumarize-bot-sumarizedText-notify").html("analyserar").show()
+
   const res = await fetch("/website/readFile", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ fileName })
-  });
-  const content = await res.text(); 
+  })
+
+  const content = await res.text()
+
   const response = await puter.ai.chat(
     "Du ska analysera och sammanfatta följande dokument. Börja direkt med innehållet, utan någon introduktion eller förklaring\n\n" + content,
     { model: "gpt-5-nano" }
-  );
-  typeText(".sumarize-bot-sumarizedText", response.message.content, 'sumarizebot', 5);
+  )
+
   $('.sumarize-bot-loading').hide()
+
+  await typeText(
+    ".sumarize-bot-sumarizedText",
+    response.message.content,
+    'sumarizebot',
+    5
+  )
+
+  $(".sumarize-bot-sumarizedText-notify").html("klar!")
+  $(".sumarize-bot-sumarizedText-notify").css({
+    "animation-name": "none"
+  })
+
+
   $('.sumarizebot-postAnswer').show(100)
 }

@@ -1,0 +1,44 @@
+1. Logotyp
+Logotyp
+Visuell presentation: Visa logotypen i sin helhet och i olika storlekar.
+Symbol och text: Om logotypen innehåller en symbol/bild och text, förklara hur dessa kan användas tillsammans respektive separat.
+2. Färgprofil
+2.1 Primär färgpalett
+Exakta färgkoder: Specificera HEX, RGB, CMYK (och eventuellt PMS) för varje färg.
+Huvudfärger: Ange vilka färger som är viktigast och hur de ska användas (t.ex. i bakgrunder, rubriker, ikoner).
+2.2 Sekundär färgpalett
+Kompletterande färger: Färger som kan användas i detaljer, markeringar, illustrationer osv.
+Matchning med primär palett: Visa exempel på hur färgerna fungerar ihop.
+2.3 Färgprover & Kontrast
+Kontrastregler: Ange vilken kontrastnivå som bör eftersträvas för läsbarhet (t.ex. AA eller AAA enligt WCAG).
+
+
+Exempel: Visa hur textfärg och bakgrundsfärg ska kombineras för optimal läsbarhet.
+
+3. Typografi
+3.1 Primärt Typsnitt
+Typsnittets namn & stil: Exempelvis ”Open Sans Regular” eller ”Times New Roman”.
+Användningsområde: Rubriker, brödtext, mellanrubriker osv.
+Licensinformation: Om företaget använder licensierade fonter, ange hur man får tag på dem.
+
+
+3.2 Sekundärt Typsnitt
+Alternativt typsnitt: För eventuella specialanvändningar (t.ex. undertitlar, kampanjer, digitala enheter där huvudtypsnitt saknas).
+Hierarki & storlekar: Ge exempel på typografisk skala (H1, H2, H3, brödtext, citat osv.).
+3.3 Exempel på typografisk layout
+Visuell guide: Visa exempel på hur rubriker och textstycken ska se ut i en broschyr, på en webbsida eller i en presentation.
+4. Bildspråk & Illustrationer
+4.1 Fotografiska bilder
+Stil & ton: Ange vilken typ av foton som passar varumärket (t.ex. ljusa och personliga, mörka och dramatiska, naturliga miljöer osv.).
+Riktlinjer: Exempel på rätt och fel i bildval (t.ex. undvik stockbilder med oäkta leenden, prioritera äkta och inkluderande bilder).
+4.2 Illustrationer & Ikoner
+Grafisk stil: Ange om ikoner ska vara linjära, platta, färgglada, minimalistiska osv.
+Konsekvens: Förklara hur ikoner och illustrationer ska harmoniera med företagets färger och typsnitt.
+
+5. Grafiska Element & Layoutprinciper
+5.1 Former & Mönster
+Bakgrundsgrafik: Eventuella former, mönster eller texturer som får användas.
+Riktlinjer: Hur dessa får kombineras med färger eller foton.
+5.2 Layout & Grid System
+Grundgrid: Beskriv en grundläggande grid-struktur för trycksaker och digital design.
+Exempel: Visa exempel på hur marginer och mellanrum bör användas.

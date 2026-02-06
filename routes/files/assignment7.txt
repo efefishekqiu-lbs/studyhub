@@ -1,0 +1,13 @@
+Gör följande:
+
+Byt kod med en klasskompis.
+Alla får gemensamma ändringar som ska göra i sin kompis kod utan Ai hjälp:
+Ändra hover-funktionen på menyn (t.ex. ny bakgrundsfärg).
+Ändra tabellens rubrik.
+Ändra Bakgrundsfärgen
+Ladda upp den nya hemsidan i en mapp på github för vibecode.Svara på frågorna.
+Tyck på lämna in.
+
+Frågor att fundera på under arbetet:
+Hur lätt var det att hitta rätt ställe i koden?
+Var AI:s kod lättare eller svårare att förstå än den kod du själv har skrivit tidigare?
