@@ -100,3 +100,6 @@ Varje kod motsvarar ett specifikt ämne.
 2. Välj alternativet "Gå med i klass"
 3. Ange rätt klasskod
 4. Du är nu med i klassen och får tillgång till dess innehåll 🎉
+
+5. <img width="1919" height="915" alt="image" src="https://github.com/user-attachments/assets/0ed4858a-2fba-42f5-8725-0713d538bddc" />
+
