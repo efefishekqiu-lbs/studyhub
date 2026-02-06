@@ -94,10 +94,6 @@ canvas {
   flex-direction: column;
 }
 
-/* .section {
-  padding: 100px 40px;
-} */
-
 .section {
   opacity: 0;
   transform: scale(0.99);
@@ -279,15 +275,15 @@ fiveShieldText {
 }
 
 .features-box-events {
-  background: linear-gradient(135deg, #005cfbff, /* en koyu */ #1d6af0ff, /* orta ton */ #5b96fcff /* en açık */);
+  background: linear-gradient(135deg, #005cfbff,#1d6af0ff, #5b96fcff);
 }
 
 .features-box-aimbot {
-  background: linear-gradient(135deg, #ff00aaff, /* en koyu */ #fd30b9ff, /* orta ton */ #f758c2ff /* en açık */);
+  background: linear-gradient(135deg, #ff00aaff,  #fd30b9ff, #f758c2ff);
 }
 
 .features-box-installation {
-  background: linear-gradient(135deg, #ff6e00, /* en koyu */ #fc872eff, /* orta ton */ #f69952ff /* en açık */);
+  background: linear-gradient(135deg, #ff6e00, #fc872eff,  #f69952ff);
 }
 
 /* Faq */

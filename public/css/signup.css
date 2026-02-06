@@ -34,14 +34,6 @@
    --bgSection: rgb(255, 255, 255);
    --shadows: rgba(0, 0, 0, 0)
  }
-/* .opacityLow {
-   transition: all ease-in 90ms;
-   cursor: pointer;
-}
-
-.opacityLow:hover {
-   opacity: 60%;
-} */
 
 *::-webkit-scrollbar-track {
    width: 0.5rem;
@@ -67,7 +59,6 @@ body {
    flex-direction: column;
    justify-content: center;
    background-image: url("../assets/shutterstock_1958383675-crop.webp");
-   /* background-position: center; */
    background-size: cover;
    border-right: 1px solid var(--borderBtm);
    background-color: rgba(255, 255, 255, 0.3);
@@ -125,7 +116,6 @@ img {
    min-height: 10vh;
    padding: 0.8vw;
    padding-bottom: 4vh;
-   /* padding-bottom: 2vh; */
    height: max-content;
    background-color: var(--bg);
    border: 1px solid var(--borderBtm);
@@ -234,13 +224,11 @@ img {
    margin-bottom: 12px;
  }
  
- /* Labels */
  .swal-row label {
    font-size: 14px;
    color: var(--text);
  }
  
- /* Inputs */
  .swal-row input {
    padding: 6px 8px;
    border-radius: 6px;
@@ -249,7 +237,6 @@ img {
    color: var(--text);
  }
  
- /* Focus */
  .swal-row input:focus {
    outline: none;
    border-color: var(--text);

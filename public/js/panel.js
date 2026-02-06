@@ -117,7 +117,6 @@ $(document).on("click", ".sumarize-bot-minimize", function () {
   const $btn = $(this)
   const $bot = $btn.parent()
   const isOpen = $bot.hasClass("open")
-  console.log(isOpen)
 
   if (isOpen == false) {
     $bot.addClass("open")
@@ -135,7 +134,6 @@ $(document).on("click", ".sumarize-bot-minimize", function () {
     $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
       .css({ opacity: "0%" })
 
-    // $(".sumarize-bot-close").hide()
     $(".sumarize-bot-sumarizedText-notify").css({ opacity: "1" })
     $(".sumarize-bot-sumarizedText-notify").css({ "display": "block"})
 
@@ -160,14 +158,6 @@ $(document).on("click", ".sumarize-bot-minimize", function () {
     $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
       .css({ opacity: "100%" })
 
-    // $(this).css({
-    //   "position": "absolute",
-    //   "right": "10vw",
-    // })
-    // $(".sumarize-bot-close").show().css({
-    //   position: "absolut",
-    //   left: "92%"
-    // })
     $(".sumarize-bot-sumarizedText-notify").css({ opacity: "0" })
 
     if ($(".sumarize-bot-sumarizedText").html() === "") {
@@ -212,7 +202,6 @@ function reloadBetyg() {
     };
   });
 
-  console.log(results)
   $(".header-betyger").html("")
   $.each(results, function(k, v) {
     let style = "";
@@ -251,7 +240,6 @@ function reloadBetyg() {
         ${style}
       </div>
     `)
-    console.log(k, v)
   })
 
   return results;
@@ -259,18 +247,13 @@ function reloadBetyg() {
 
 
 function reloadCalender() {
-  console.log(calendar)
-  if (!calendar) return console.log("ARZULAR");
+  if (!calendar) return;
 
   calendar.removeAllEvents();
 
-  // accountInfo.calendar bir object olduğu için Object.values ile array'e çevir
-  console.log("LOAD")
   Object.values(accountInfo.calendar).forEach(ev => {
     let start = ev.startTime ? `${ev.dateStr}T${ev.startTime}` : ev.dateStr;
     let end = ev.endTime ? `${ev.dateStr}T${ev.endTime}` : ev.dateStr;
-
-    console.log(ev.title, start, end);
     calendar.addEvent({
       title: ev.title,
       start,
@@ -283,7 +266,6 @@ function reloadCalender() {
     reloadCalenderTipsters();
   }, 100);
 }
-
 
 function reloadCalenderTipsters() {
   $('.fc-event-main').each(function () {
@@ -369,7 +351,6 @@ $(document).on("click", ".klasser-remove", async function (event) {
   event.stopPropagation(); 
   let klassKod = $(this).parent().attr("data-id");
 
-  // Swal ile onay
   Swal.fire({
     title: "Är du säker?",
     text: "Detta går inte att ångra!",
@@ -605,10 +586,9 @@ function smoothScrollTo(targetY, duration = 500) {
 $(document).on('click', '.lektioner', function(e) {
   const target = $(`.klasser-wrapper[data-id="${$(this).attr('data-id')}"]`)
 
-  // const target = $($(this).attr('href'));
   if (target.length) {
       e.preventDefault();
-      const headerOffset = 80; // header offset
+      const headerOffset = 80; 
       const targetY = target.offset().top - headerOffset;
       smoothScrollTo(targetY, 500);
   }
@@ -735,7 +715,6 @@ function reloadClassesData() {
         </div>
       `);
 
-      // assignment ekleme
       $.each(v.assignments, function(kk, vv) {
         let buttonClass = ""
         if (accountInfo.assignments[vv.file]) {

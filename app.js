@@ -33,8 +33,9 @@ app.get('/dashboard', (req, res) => {
   res.render("landingPage")
 });
 
-// const PORT = 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
+// Koder för att starta localhost nodemon men man behöver inte dem när man hostar i vercel för att vercel är serverless
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 module.exports = app;

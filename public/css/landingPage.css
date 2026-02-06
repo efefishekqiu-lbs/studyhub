@@ -89,7 +89,6 @@ nav a {
   font-weight: 500;
 }
 
-/* Buttons */
 .btn {
   background: #2563eb;
   color: white;
@@ -121,7 +120,6 @@ nav a {
   border-radius: 8px;
 }
 
-/* Hero */
 .hero {
   display: flex;
   flex-wrap: wrap;
@@ -168,7 +166,6 @@ nav a {
   color: var(--text);
 }
 
-/* Sections */
 .section {
   padding: 60px 8%;
   text-align: center;
@@ -200,14 +197,12 @@ section div div a {
   margin-bottom: 35px;
 }
 
-/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
 }
 
-/* Cards */
 .card {
   background: var(--bg);
   border-radius: 16px;
@@ -278,22 +273,16 @@ section div div a {
 }
 
 .card:nth-child(1) {
-  /* background-image: url(./static/assets/chemical-engineering-assignment.png); */
   background-position: center;
 }
 .card:nth-child(2) {
-  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220006717460523/Fotolia_76098516_Subscription_Monthly_M.png?ex=6983e2af&is=6982912f&hm=3fa4282171a2e5e6bac4156d3944401041a09afa6c31099687dea68321013fd2&=&format=webp&quality=lossless&width=810&height=535"); */
   background-position: center;
 }
 .card:nth-child(3) {
-  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007258259668/wk-Grading-Scale-Change-1024x602.png?ex=6983e2af&is=6982912f&hm=ad22b37a52aeb64452bd68e4c0036ad8f591417e359429150e8838bd41164b8b&=&format=webp&quality=lossless&width=810&height=476"); */
   background-position: center;
 }
 .card:nth-child(4) {
-  /* background-image: url("https://media.discordapp.net/attachments/1467821691089453079/1468220007891865660/iStock_000042222888_Medium_160304.png?ex=6983e2b0&is=69829130&hm=0420588339b13efbea1dbb74536fe46507013866f797d0220e3987690258cd30&=&format=webp&quality=lossless&width=800&height=425"); */
   background-position: center;
-
-
 }
 
 .card:hover {
@@ -310,8 +299,6 @@ section div div a {
   color: white;
 }
 
-
-/* Links */
 .link {
   display: inline-block;
   margin-top: 14px;
@@ -320,7 +307,6 @@ section div div a {
   font-weight: bold;
 }
 
-/* CTA */
 .cta {
   background: #2563eb;
   color: white;
@@ -345,7 +331,6 @@ section div div a {
   opacity: 0.95;
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 20px;

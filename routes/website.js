@@ -361,7 +361,7 @@ router.post("/readFile", authGuard, async (req, res) => {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: "Dosya okunurken hata oluştu"
+      message: "Error while reading document"
     });
   }
 });
