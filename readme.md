@@ -79,3 +79,25 @@ Applikationen finns även tillgänglig online:
 
 👉 **[\[Länk till applikationen\]](https://studyhub-dusky.vercel.app/)**
 
+**Gå med i klasser**
+
+I applikationen kan du gå med i olika klasser genom att ange en klasskod. 
+Varje kod motsvarar ett specifikt ämne.
+
+**Tillgängliga klasser**
+
+- Idrott (Svenska)
+  Klasskod: ```A7F9K2QX```
+
+- Mentorstid
+  Klasskod: ```8TQX3A6M```
+
+- Webbutveckling
+  Klasskod: ```R2K7FJ9L```
+
+`Så här gör du`
+
+1. Logga in i applikationen
+2. Välj alternativet "Gå med i klass"
+3. Ange rätt klasskod
+4. Du är nu med i klassen och får tillgång till dess innehåll 🎉
