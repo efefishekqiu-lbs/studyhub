@@ -34,6 +34,7 @@
       
       <svg stroke="currentColor" class="add-lektion" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
       <div class="header-profile">
+        <button class="header-logout opacityLow" onclick="window.location.href = `/website/logout?`">Logga ut</button>
        <div class="header-profile-exist-letter">D</div>
        <div class="header-profile-exit opacityLow"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"></path></svg></div>
        <h5 class="header-email">darko.kitanoski@elev.ga.lbs.se</h5>
@@ -220,7 +221,7 @@
         </div>
 
         <div class="sumarize-bot">
-            <img class="sumarizebot-postAnswer" src="/static/assets/studyailogo.png" alt="sumarizebot">
+            <img class="sumarizebot-postAnswer sumarizebot-botIcon" src="/static/assets/studyailogo.png" alt="sumarizebot">
             <h2 class="sumarizebot-postAnswer">:</h2>
             <span class="sumarize-bot-sumarizedText"></span>
             <span class="sumarize-bot-sumarizedText-notify"></span>

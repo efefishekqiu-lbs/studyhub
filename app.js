@@ -33,8 +33,8 @@ app.get('/dashboard', (req, res) => {
   res.render("landingPage")
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-// module.exports = app;
+// const PORT = 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
+module.exports = app;

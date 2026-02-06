@@ -117,36 +117,10 @@ $(document).on("click", ".sumarize-bot-minimize", function () {
   const $btn = $(this)
   const $bot = $btn.parent()
   const isOpen = $bot.hasClass("open")
+  console.log(isOpen)
 
-  if (!isOpen) {
+  if (isOpen == false) {
     $bot.addClass("open")
-
-    $bot.css({
-      height: "100%",
-      bottom: "0%",
-      width: "100%",
-      left: "0%",
-      "border-radius": "6px"
-    })
-
-    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
-      .css({ opacity: "100%" })
-
-    $(".sumarize-bot-close").show()
-    $(".sumarize-bot-sumarizedText-notify").css({ opacity: "0" })
-
-    $btn.css({
-      transform: "rotate(0deg)",
-      width: "40px",
-      height: "40px",
-      left: isMobile ? "80%" : "87%"
-    })
-    $(".sumarize-bot-close").css({
-      left: isMobile ? "88%" : "92%"  
-    })
-
-  } else {
-    $bot.removeClass("open")
 
     $bot.css({
       height: "10vh",
@@ -159,18 +133,51 @@ $(document).on("click", ".sumarize-bot-minimize", function () {
     })
 
     $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
-      .css({ opacity: "0" })
+      .css({ opacity: "0%" })
 
-    $(".sumarize-bot-close").hide()
+    // $(".sumarize-bot-close").hide()
     $(".sumarize-bot-sumarizedText-notify").css({ opacity: "1" })
-
-    if ($(".sumarize-bot-sumarizedText").html() === "") {
-      $(".sumarize-bot-sumarizedText-notify").text("analyserar")
-    }
+    $(".sumarize-bot-sumarizedText-notify").css({ "display": "block"})
 
     $btn.css({
       transform: "rotate(180deg)",
-      left: isMobile ? "80%" : "92%"
+      width: "40px",
+      height: "40px",
+      right: "5vw"
+    })
+
+
+  } else {
+    $bot.removeClass("open")
+    $bot.css({
+      height: "100%",
+      bottom: "0",
+      width: "100%",
+      left: "0",
+      "border-radius": "6px",
+    })
+
+    $(".sumarize-bot-loading, .sumarizebot-postAnswer, .sumarize-bot-sumarizedText")
+      .css({ opacity: "100%" })
+
+    // $(this).css({
+    //   "position": "absolute",
+    //   "right": "10vw",
+    // })
+    // $(".sumarize-bot-close").show().css({
+    //   position: "absolut",
+    //   left: "92%"
+    // })
+    $(".sumarize-bot-sumarizedText-notify").css({ opacity: "0" })
+
+    if ($(".sumarize-bot-sumarizedText").html() === "") {
+      $(".sumarize-bot-sumarizedText-notify").text("Analyserar")
+    }
+    $(".sumarize-bot-sumarizedText-notify").css({ "display": "none"})
+
+    $btn.css({
+      transform: "rotate(0deg)",
+      right:  "5vw"
     })
 
   }
@@ -205,6 +212,7 @@ function reloadBetyg() {
     };
   });
 
+  console.log(results)
   $(".header-betyger").html("")
   $.each(results, function(k, v) {
     let style = "";
@@ -332,6 +340,9 @@ $(document).on("click", ".add-lektion", async function () {
       }
       accountInfo.classes[klassKod] = true;
       reloadClassesData()
+      setTimeout(() => {
+        reloadBetyg()
+      }, 200);
     } catch (err) {
       console.error(err)
       Swal.fire({
@@ -435,7 +446,11 @@ function handleKlassWrapper(id) {
 }
 
 function setHeaderMode(status) {
-  
+  if (status == true) {
+    $(".header-logout").show(100)
+  } else {
+    $(".header-logout").hide()
+  }
   if (isMobile===false) {
     if (status == true) {
       $(".header-profile-secondProfile").css({
@@ -619,10 +634,12 @@ function selectNavbarButton(id) {
     $("main").show(200)
     $("canvas").show()
     if (isNavbarActive == false) {
-      isNavbarActive = true;
-      $(".burger-menu").css("transform", "rotate(0deg)");
-      $("nav").hide();
-      $(".lektioner>h1").show()
+      if (isMobile) {
+        isNavbarActive = true;
+        $(".burger-menu").css("transform", "rotate(0deg)");
+        $("nav").hide();
+        $(".lektioner>h1").show()
+      }
     } 
   }
   if (id == "kalender") {
@@ -1205,10 +1222,11 @@ async function submitFile(fileName, lektion) {
   let response = await res.json()
   if (response.success == true) {
     $(`.uppgifter[data-file="${fileName}"]`).addClass("uppgifterDone")
-    accountInfo.assignments[fileName] = true;
-    reloadBetyg()
+    accountInfo.assignments[fileName] = lektion;
+    setTimeout(() => {
+      reloadBetyg()
+    }, 100);
   }
-  console.log(response)
 }
 
 async function sumarizeFile(fileName) {
@@ -1216,8 +1234,7 @@ async function sumarizeFile(fileName) {
   $('.sumarize-bot').show(200)
   $('.sumarize-bot-loading').show()
 
-  // visa status direkt
-  $(".sumarize-bot-sumarizedText-notify").html("analyserar").show()
+  $(".sumarize-bot-sumarizedText-notify").html("Analyserar").show()
 
   const res = await fetch("/website/readFile", {
     method: "POST",
@@ -1234,6 +1251,7 @@ async function sumarizeFile(fileName) {
 
   $('.sumarize-bot-loading').hide()
 
+  $('.sumarizebot-postAnswer').show(100)
   await typeText(
     ".sumarize-bot-sumarizedText",
     response.message.content,
@@ -1241,11 +1259,8 @@ async function sumarizeFile(fileName) {
     5
   )
 
-  $(".sumarize-bot-sumarizedText-notify").html("klar!")
+  $(".sumarize-bot-sumarizedText-notify").html("Klart!")
   $(".sumarize-bot-sumarizedText-notify").css({
     "animation-name": "none"
   })
-
-
-  $('.sumarizebot-postAnswer').show(100)
 }

@@ -366,6 +366,11 @@ router.post("/readFile", authGuard, async (req, res) => {
   }
 });
 
+router.get('/logout', authGuard, async (req, res) => {
+  clearAuth(res)
+  return res.redirect('signup')
+})
+
 function generateString(length) {
   return crypto.randomBytes(length).toString('hex') 
 }

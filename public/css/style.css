@@ -21,6 +21,7 @@
   --borderBtm: #dbdbdb47;
   --hoverBg: #252424;
   --shadows: rgba(0, 0, 0, 0.17);
+  --sumarizeshadow: inset 0 0 10px #575757;
 }
 
 [data-theme="lightmode"] {
@@ -32,6 +33,7 @@
   --borderBtm: #3030303c;
   --hoverBg: #a3a3a3;
   --shadows: rgba(0, 0, 0, 0);
+  --sumarizeshadow: inset 0 0 10px #ffffff;
 }
 
 .opacityLow {
@@ -160,6 +162,22 @@ header > img {
   z-index: 99999;
   transition: all 180ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
   cursor: pointer;
+}
+
+.header-logout {
+  position: absolute;
+  top: 2vh;
+  left: 50%;
+  transform: translate(-50%);
+  width: max-content;
+  height: max-content;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 13px;
+  background-color: var(--bg);
+  border: 1px solid var(--borderBtm);
+  display: none;
 }
 
 .header-profile-exit {
@@ -488,6 +506,7 @@ h1 {
   pointer-events: none !important;
 }
 
+
 .klasser-wrapper-info-uppgift div a {
   background-color: var(--fill);
   border-radius: 6px;
@@ -527,7 +546,7 @@ h1 {
 }
 
 .klasser-wrapper-info-uppgift div {
-  width: 50%;
+  width: 60%;
   display: flex;
   height: 100%;
   gap: 15px;
@@ -897,12 +916,6 @@ td {
   .sumarize-bot{
     width: 100%
   }
-  .sumarize-bot-minimize {
-    left: 80%;
-  }
-  .sumarize-bot-close {
-    left: 83%; 
-  }
   .chatbot-wrapper-close {
     position: absolute;
     top: 2vh;
@@ -921,7 +934,7 @@ td {
   }
   .chatbot-wrapper {
     right: 6vw;
-    background-color: var(--hoverBg);
+    background-color: var(--bg);
     border: 1px solid var(--text);
     padding: 25px;
   }
@@ -950,6 +963,20 @@ td {
     width: 35px;
     left: -5%;
   }
+  
+  .chatbot-wrapper-questionsWrapper-question  {
+    width: 100%;
+  }
+  
+  .chatbot-wrapper-questionsWrapper {
+    padding: 25px;
+    height: 60%;
+  }
+
+  .klasser-wrapper-info-uppgift div {
+    width: 50%;
+  }
+
 
   .klasser-remove {
     height: 25px;
@@ -996,9 +1023,9 @@ td {
   }
 
   .lektioner svg {
-    height: 100px;
-    width: 100px;
-    background-color: #006aff;
+    height: 22px;
+    width: 22px;
+
   }
   canvas {
     width: 100%;
@@ -1046,6 +1073,72 @@ td {
   .fc-timeGridWeek-view {
     height: 80vh;
   }
+
+  .sumarize-bot-close {
+    position: absolute;
+    top: 2vh;
+    right: 5vw !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--headerbg);
+    border: 1px solid var(--borderBtm);
+    color: var(--text);
+    fill: var(--text);
+    display: block;
+  }
+  
+  .sumarize-bot-minimize {
+    position: absolute;
+    top: 2vh;
+    right: 15vw !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--headerbg);
+    border: 1px solid var(--borderBtm);
+    color: var(--text);
+    fill: var(--text);
+    display: block;
+  }
+
+  .sumarize-bot-loading {
+      display: inline-block;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 27vw !important;
+      height: 27vw !important;
+      display: none;
+  }
+
+  .sumarize-bot-loading>img {
+    position: absolute;
+    top: 58% !important;
+    left: 55% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 85px !important;
+  }
+
+  .sumarize-bot-loading div {
+    width: 27vw !important;
+    height: 27vw !important;
+  }
+
+  .sumarize-bot > h2 {
+    position: absolute;
+    top: 2.1vh;
+    left: 7.1vw;
+    font-size: 25px;
+    color: #ccc;
+  }
 }
 
 .sumarize-bot {
@@ -1055,34 +1148,35 @@ td {
   width: 100%;
   height: 100%;
   background-color: var(--bg);
-  box-shadow: inset 0 0 10px #575757;
+  box-shadow: var(--sumarizeshadow);
+  border: 1px solid var(--borderBtm);
   z-index: 999999999;
   display: none;
   padding: 30px;
 }
 
-.sumarize-bot img {
+.sumarizebot-botIcon {
   position: absolute;
-  top: 2vh;
-  left: 2vw;
+  top: 6.5vh !important;
+  left: 0.1vw !important;
   width: 100px;
   filter: drop-shadow(0px 0px 10px #006aff);
 }
 
 .sumarize-bot > h2 {
   position: absolute;
-  top: 2.1vh;
-  left: 7vw;
-  font-size: 90px;
+  top: 8% !important;
+  left: 16.6vw !important;
+  font-size: 85px;
   color: #ccc;
 }
 
 .sumarize-bot-sumarizedText {
   position: absolute;
-  top: 9%;
-  left: 11%;
-  width: 80%;
-  height: 85%;
+  top: 15%;
+  left: 22.5% !important;
+  width: 74% !important;
+  height: 75% !important;
   overflow-y: auto;
   color: #fff;
   font-size: 14px;
@@ -1091,8 +1185,8 @@ td {
 
 .sumarize-bot-close {
   position: absolute;
-  top: 3vh;
-  left: 92%;
+  top: 2vh;
+  right: 2vw;
   width: 40px;
   height: 40px;
   border-radius: 5px;
@@ -1108,8 +1202,8 @@ td {
 
 .sumarize-bot-minimize {
   position: absolute;
-  top: 3vh;
-  left: 87%;
+  top: 2vh;
+  right: 5vw;
   width: 40px;
   height: 40px;
   border-radius: 5px;
