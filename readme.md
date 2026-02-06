@@ -64,11 +64,7 @@ Utöver detta har vi även använt:
 ```bash
    npm install -g nodemon
 ```
-3. Installera beroenden:
-   ```bash
-   npm install
-   ```
-4. Starta applikationen:
+3. Starta applikationen:
    ```bash
    nodemon app.js
    ```
