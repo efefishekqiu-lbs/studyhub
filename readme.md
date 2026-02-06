@@ -95,7 +95,7 @@ Varje kod motsvarar ett specifikt ämne.
 - Webbutveckling
   Klasskod: ```R2K7FJ9L```
 
-`Så här gör du`
+**Så här gör du**
 
 1. Logga in i applikationen
 2. Välj alternativet "Gå med i klass"
