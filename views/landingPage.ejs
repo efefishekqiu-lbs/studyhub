@@ -12,6 +12,9 @@
   <link rel="icon" type="image/x-icon" href="/static/assets/titleicon.png">
   <script src="/static/js/tooltipster.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <script src="/static/js/beforeafter.jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -26,6 +29,19 @@
       <a class="btn small" href="/website/signup">Logga in</a>
     </nav>
   </header>
+
+  <div class="hero-text">
+    <h2 class="text-5xl text-center">ALLT DU BEHÖVER FÖR DINA STUDIER</h2>
+    <p class="subtitle text-center">Ett modernt och enkelt sätt att hålla koll på alla dina studier, med hjälp av AI </p>
+        <p class="subtitle text-center">Börja nu med StudyHub</p>
+  </div>
+  
+  <div id="laptop-view">
+    <div id="my-viewer">
+      <img src="/static/assets/darktheme.png" alt="Before">
+      <img src="/static/assets/lighttheme.png" alt="after">
+    </div>
+  </div>
 
   <!-- Features -->
   <section id="features" class="section">
@@ -123,6 +139,11 @@
     </div>
   </footer>
 
+  <script>
+    $(document).ready(function() {
+      $('#my-viewer').beforeAfter()
+    });
+  </script>
   <script src="/static/js/tema.js"></script>
 </body>
 </html>
