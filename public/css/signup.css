@@ -9,6 +9,8 @@
    transition: 200ms;
    overflow: hidden;
 }
+
+/* de är grund färger till vit tema och mörk tema */
 :root {
    --bg: #000000;
    --bgSection: rgb(44, 44, 44);

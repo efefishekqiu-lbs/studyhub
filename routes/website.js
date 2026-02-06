@@ -16,10 +16,12 @@ const {
   
 const supabase = require('../lib/supabase');
 
+// när användaren går till signup så visar vi signup htmlen
 router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+// När använderan går till panel så kontrolerar vi om han är loggad in om han har en aktif session med authGuard functionen som ligger vid lib/cookieLib.js
 router.get('/panel', authGuard, async (req, res) => {
   const userId = req.user.userId
   const { data: user } = await supabase
@@ -40,6 +42,7 @@ router.get('/panel', authGuard, async (req, res) => {
   })
 })
 
+// En listener som ändrar columnen i database för spara kalendern
 router.post('/addKalender', authGuard, async (req, res) => {
   const userId = req.user.userId;
   try {
@@ -86,7 +89,7 @@ router.post('/addKalender', authGuard, async (req, res) => {
   }
 });
 
-
+// En listener som ändrar classes columnen för att spara joinade klasser
 router.post('/addClass', authGuard, async (req, res) => {
   const userId = req.user.userId
   try {
@@ -124,6 +127,7 @@ router.post('/addClass', authGuard, async (req, res) => {
   }
 })
 
+// En listener som tar bort sparade klassen
 router.post('/removeClass', authGuard, async (req, res) => {
   const userId = req.user.userId;
   try {
@@ -163,7 +167,7 @@ router.post('/removeClass', authGuard, async (req, res) => {
   }
 });
 
-
+// Signup listener här blir det aktioner som logga in eller registera. Vi använder mest populera packagen bcrypt som gör att passworden är crypterad och vi gemför 2 password med en function
 router.post('/signup', async (req, res) => {
   try {
     let { email, password, loginType } = req.body;
@@ -305,6 +309,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// Här är det functionen för lämna in uppgift
 router.post('/submitFile', authGuard, async (req, res) => {
   const userId = req.user.userId;
 
@@ -349,6 +354,7 @@ router.post('/submitFile', authGuard, async (req, res) => {
   }
 });
 
+// Denna funktionen är för sumarize bot den läser routes/files/fileName.txt och skickar till front end för att man ska fråga till ai för en förkortning 
 router.post("/readFile", authGuard, async (req, res) => {
   try {
     const { fileName } = req.body;
@@ -366,6 +372,7 @@ router.post("/readFile", authGuard, async (req, res) => {
   }
 });
 
+// En logout funktion som tar bort sessionen och skickar vidare till signup sidan
 router.get('/logout', authGuard, async (req, res) => {
   clearAuth(res)
   return res.redirect('signup')
